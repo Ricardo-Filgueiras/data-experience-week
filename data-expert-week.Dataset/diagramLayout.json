@@ -110,6 +110,16 @@
             "width": 234
           },
           "zIndex": 0
+        },
+        {
+          "location": {},
+          "nodeIndex": "Parâmetro",
+          "nodeLineageTag": "37317bf3-d87c-4a77-acf4-6e5f87937bfb",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "Todas as tabelas",

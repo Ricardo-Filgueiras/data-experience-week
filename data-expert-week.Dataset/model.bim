@@ -16,7 +16,7 @@
       },
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"dCalendario-pwq\",\"CategoriaProduto\",\"ClientesVendedores\",\"Geografia\",\"RegioesBrasil\",\"Supervisor\",\"dProduto\",\"dVendedor\",\"dCliente\",\"fVendas\",\"fMetas\",\"Medidas\",\"Meta_2022\",\"fx_dias_uteis_mes\",\"Meta_2023\",\"ItensVendas\",\"Vendas\",\"fx_dias_uteis_trimestre\"]"
+        "value": "[\"dCalendario-pwq\",\"CategoriaProduto\",\"ClientesVendedores\",\"Geografia\",\"RegioesBrasil\",\"Supervisor\",\"dProduto\",\"dVendedor\",\"dCliente\",\"fVendas\",\"fMetas\",\"Medidas\",\"Meta_2022\",\"fx_dias_uteis_mes\",\"Meta_2023\",\"ItensVendas\",\"Vendas\",\"fx_dias_uteis_trimestre\",\"Foto Produto\",\"Foto Vendedor\"]"
       }
     ],
     "culture": "pt-BR",
@@ -348,6 +348,55 @@
         ],
         "kind": "m",
         "lineageTag": "2d99fe7f-a73b-4cf8-bf14-b1cc75e7ef6e"
+      },
+      {
+        "name": "Foto Produto",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navegação"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\PinskiDatabase_Fotos.xlsx\"), null, true),",
+          "    #\"Foto Produto_Sheet\" = Fonte{[Item=\"Foto Produto\",Kind=\"Sheet\"]}[Data],",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Foto Produto_Sheet\",{{\"Column1\", type text}, {\"Column2\", type text}}),",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Tipo Alterado\", [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado1\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"Produto\", type text}, {\"URL\", type text}})",
+          "in",
+          "    #\"Tipo Alterado1\""
+        ],
+        "kind": "m",
+        "lineageTag": "b5ae8185-e8ae-4543-80e6-38bb5a909554"
+      },
+      {
+        "name": "Foto Vendedor",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navegação"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\PinskiDatabase_Fotos.xlsx\"), null, true),",
+          "    #\"Foto Vendedor_Sheet\" = Fonte{[Item=\"Foto Vendedor\",Kind=\"Sheet\"]}[Data],",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Foto Vendedor_Sheet\", [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id_vendedor\", Int64.Type}, {\"URL\", type text}})",
+          "in",
+          "    #\"Tipo Alterado\""
+        ],
+        "kind": "m",
+        "lineageTag": "99c3f269-3a4c-4b92-8344-eacb8c0a6e94"
       }
     ],
     "queryGroups": [
@@ -883,6 +932,29 @@
             "lineageTag": "539c7166-37a6-413a-bd0f-d6884ba24517",
             "sourceColumn": "NomeDia",
             "summarizeBy": "none"
+          },
+          {
+            "name": "Ja_passo?",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "boolean",
+            "expression": [
+              "",
+              "IF( ",
+              "    'dCalendario-pwq'[Data] <+ MAX(fVendas[data]),",
+              "    TRUE()",
+              ")",
+              ""
+            ],
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "isDataTypeInferred": true,
+            "lineageTag": "5c1ff835-03c0-4318-a02b-3dd469b56d35",
+            "summarizeBy": "none",
+            "type": "calculated"
           }
         ],
         "dataCategory": "Time",
@@ -1186,6 +1258,19 @@
             "lineageTag": "5b992bba-2ba5-4ead-9e7a-699b0aec7701",
             "sourceColumn": "categoria_descricao",
             "summarizeBy": "none"
+          },
+          {
+            "name": "Foto Produto.URL",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7cf2abc3-91e7-41b7-bfce-0ea955b912c0",
+            "sourceColumn": "Foto Produto.URL",
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "4cc4619f-eab0-439b-857c-351671db0134",
@@ -1203,9 +1288,11 @@
                 "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"categoria_id\", Int64.Type}, {\"descricao\", type text}, {\"tamanho\", type text}, {\"custoUnitario\", Int64.Type}}),",
                 "    #\"Consultas Mescladas\" = Table.NestedJoin(#\"Tipo Alterado\", {\"categoria_id\"}, CategoriaProduto, {\"id\"}, \"CategoriaProduto\", JoinKind.LeftOuter),",
                 "    #\"CategoriaProduto Expandido\" = Table.ExpandTableColumn(#\"Consultas Mescladas\", \"CategoriaProduto\", {\"descricao\"}, {\"CategoriaProduto.descricao\"}),",
-                "    #\"Colunas Renomeadas\" = Table.RenameColumns(#\"CategoriaProduto Expandido\",{{\"CategoriaProduto.descricao\", \"categoria_descricao\"}})",
+                "    #\"Colunas Renomeadas\" = Table.RenameColumns(#\"CategoriaProduto Expandido\",{{\"CategoriaProduto.descricao\", \"categoria_descricao\"}}),",
+                "    #\"Consultas Mescladas1\" = Table.NestedJoin(#\"Colunas Renomeadas\", {\"descricao\"}, #\"Foto Produto\", {\"Produto\"}, \"Foto Produto\", JoinKind.LeftOuter),",
+                "    #\"Foto Produto Expandido\" = Table.ExpandTableColumn(#\"Consultas Mescladas1\", \"Foto Produto\", {\"URL\"}, {\"Foto Produto.URL\"})",
                 "in",
-                "    #\"Colunas Renomeadas\""
+                "    #\"Foto Produto Expandido\""
               ],
               "type": "m"
             }
@@ -1305,6 +1392,19 @@
             "lineageTag": "f1cf1b9c-377e-4bf0-97c5-518a2ee485b8",
             "sourceColumn": "gerente_descricao",
             "summarizeBy": "none"
+          },
+          {
+            "name": "Foto Vendedor.URL",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7fe53cc0-96d5-4ed6-8fbd-bc9587ecceae",
+            "sourceColumn": "Foto Vendedor.URL",
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "fa9d4317-c3d9-40dd-aaa7-06e6ee7036f8",
@@ -1322,9 +1422,11 @@
                 "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"descricao\", type text}, {\"supervisor_id\", Int64.Type}}),",
                 "    #\"Consultas Mescladas\" = Table.NestedJoin(#\"Tipo Alterado\", {\"supervisor_id\"}, Supervisor, {\"id\"}, \"Supervisor\", JoinKind.LeftOuter),",
                 "    #\"Supervisor Expandido\" = Table.ExpandTableColumn(#\"Consultas Mescladas\", \"Supervisor\", {\"descricao\", \"gerente_id\", \"gerente_descricao\"}, {\"suo_descricao\", \"gerente_id\", \"gerente_descricao\"}),",
-                "    #\"Colunas Renomeadas\" = Table.RenameColumns(#\"Supervisor Expandido\",{{\"descricao\", \"Vendedor_descricao\"}, {\"id\", \"id_vendedor\"}, {\"suo_descricao\", \"sup_descricao\"}})",
+                "    #\"Colunas Renomeadas\" = Table.RenameColumns(#\"Supervisor Expandido\",{{\"descricao\", \"Vendedor_descricao\"}, {\"id\", \"id_vendedor\"}, {\"suo_descricao\", \"sup_descricao\"}}),",
+                "    #\"Consultas Mescladas1\" = Table.NestedJoin(#\"Colunas Renomeadas\", {\"supervisor_id\"}, #\"Foto Vendedor\", {\"id_vendedor\"}, \"Foto Vendedor\", JoinKind.LeftOuter),",
+                "    #\"Foto Vendedor Expandido\" = Table.ExpandTableColumn(#\"Consultas Mescladas1\", \"Foto Vendedor\", {\"URL\"}, {\"Foto Vendedor.URL\"})",
                 "in",
-                "    #\"Colunas Renomeadas\""
+                "    #\"Foto Vendedor Expandido\""
               ],
               "type": "m"
             }
@@ -1437,10 +1539,14 @@
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"pt-BR\"}"
               }
             ],
             "dataType": "int64",
-            "formatString": "0",
+            "formatString": "\"R$\"\\ #,0;-\"R$\"\\ #,0;\"R$\"\\ #,0",
             "lineageTag": "09d79389-3f6e-4262-ab92-13d980259d8c",
             "sourceColumn": "valor_unitario",
             "summarizeBy": "sum"
@@ -1562,18 +1668,12 @@
           },
           {
             "name": "$faturamento",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"currencyCulture\":\"pt-BR\"}"
-              }
-            ],
             "expression": [
               "",
               "         SUMX(fVendas, fVendas[valor_unitario] * fVendas[item_quantidade] - fVendas[valor_desconto])",
               ""
             ],
-            "formatString": "\"R$\"\\ #,0.00;-\"R$\"\\ #,0.00;\"R$\"\\ #,0.00",
+            "formatString": "#,0.00",
             "lineageTag": "7e2d7e37-577a-40e7-9f35-c05eba845abe"
           },
           {
@@ -1706,6 +1806,46 @@
               ")"
             ],
             "lineageTag": "c152b7ce-cc0a-4869-8fe3-97a0bb021f07"
+          },
+          {
+            "name": "Faturamento vs Meta",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "[$faturamento] - [$meta_diluida]",
+            "lineageTag": "0c8edd04-cff4-49cf-9df5-52022d850775"
+          },
+          {
+            "name": "cor_visual",
+            "expression": [
+              "",
+              "IF(",
+              "    [Faturamento vs Meta] > 0,",
+              "    \"#564CFB\", // bateu a meta ",
+              "    \"#FA8187\"  //Não bateu a meta",
+              "",
+              ")"
+            ],
+            "lineageTag": "adb968ce-4c09-4257-a184-659fde6abaaa"
+          },
+          {
+            "name": "Rotulo de dados",
+            "expression": [
+              "",
+              "var _ft = [$faturamento]",
+              "var _result = ",
+              "SWITCH(TRUE(),",
+              "_ft > 1E6, FORMAT(_ft,\"#0,,.0 Mi\"),",
+              "BLANK()",
+              ")",
+              "",
+              "return _result",
+              ""
+            ],
+            "lineageTag": "2113ddbf-0393-45ce-9e92-c7f632fc5129"
           }
         ],
         "partitions": [
@@ -1876,6 +2016,103 @@
               "expression": [
                 "SUMMARIZE(",
                 "    dVendedor,dVendedor[gerente_descricao],dVendedor[gerente_id])"
+              ],
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Parâmetro",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "b8d01344ade240a7a26b3595ee83d1e9"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Parâmetro",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "isNameInferred": false,
+            "lineageTag": "09646b45-0987-4a44-a530-020b8ea3e302",
+            "relatedColumnDetails": {
+              "groupByColumns": [
+                {
+                  "groupingColumn": "Parâmetro Campos"
+                }
+              ]
+            },
+            "sortByColumn": "Parâmetro Pedido",
+            "sourceColumn": "[Value1]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Parâmetro Campos",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "extendedProperties": [
+              {
+                "name": "ParameterMetadata",
+                "type": "json",
+                "value": {
+                  "kind": 2,
+                  "version": 3
+                }
+              }
+            ],
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": false,
+            "lineageTag": "65351245-7fb4-482d-bd60-77a831e600c1",
+            "sortByColumn": "Parâmetro Pedido",
+            "sourceColumn": "[Value2]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Parâmetro Pedido",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": false,
+            "lineageTag": "dd039447-f2eb-4dc1-b6de-d2b4f1b45e98",
+            "sourceColumn": "[Value3]",
+            "summarizeBy": "sum",
+            "type": "calculatedTableColumn"
+          }
+        ],
+        "lineageTag": "37317bf3-d87c-4a77-acf4-6e5f87937bfb",
+        "partitions": [
+          {
+            "name": "Parâmetro",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "{",
+                "    (\"Gerente\", NAMEOF('dVendedor'[gerente_descricao]), 0),",
+                "    (\"Supervisor\", NAMEOF('dVendedor'[sup_descricao]), 1)",
+                "}"
               ],
               "type": "calculated"
             }
