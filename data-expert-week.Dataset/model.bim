@@ -8,7 +8,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.120.731.0 (23.08)"
+        "value": "2.122.746.0 (23.10)"
       },
       {
         "name": "PBI_ProTooling",
@@ -52,12 +52,12 @@
           }
         ],
         "expression": [
-          "let",
-          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),",
-          "    Geografia_Sheet = Fonte{[Item=\"Geografia\",Kind=\"Sheet\"]}[Data],",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Geografia_Sheet, [PromoteAllScalars=true]),",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"cidade\", type text}, {\"uf\", type text}, {\"estado\", type text}})",
-          "in",
+          "let\r",
+          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),\r",
+          "    Geografia_Sheet = Fonte{[Item=\"Geografia\",Kind=\"Sheet\"]}[Data],\r",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Geografia_Sheet, [PromoteAllScalars=true]),\r",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"cidade\", type text}, {\"uf\", type text}, {\"estado\", type text}})\r",
+          "in\r",
           "    #\"Tipo Alterado\""
         ],
         "kind": "m",
@@ -76,15 +76,15 @@
           }
         ],
         "expression": [
-          "let",
-          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),",
-          "    #\"Colunas Removidas\" = Table.RemoveColumns(Fonte,{\"Item\", \"Kind\", \"Hidden\"}),",
-          "    #\"Linhas Filtradas\" = Table.SelectRows(#\"Colunas Removidas\", each ([Name] = \"RegioesBrasil\")),",
-          "    #\"Data Expandido\" = Table.ExpandTableColumn(#\"Linhas Filtradas\", \"Data\", {\"Column1\", \"Column2\"}, {\"Data.Column1\", \"Data.Column2\"}),",
-          "    #\"Colunas Removidas1\" = Table.RemoveColumns(#\"Data Expandido\",{\"Name\"}),",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Colunas Removidas1\", [PromoteAllScalars=true]),",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"UF\", type text}, {\"Regiao\", type text}})",
-          "in",
+          "let\r",
+          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),\r",
+          "    #\"Colunas Removidas\" = Table.RemoveColumns(Fonte,{\"Item\", \"Kind\", \"Hidden\"}),\r",
+          "    #\"Linhas Filtradas\" = Table.SelectRows(#\"Colunas Removidas\", each ([Name] = \"RegioesBrasil\")),\r",
+          "    #\"Data Expandido\" = Table.ExpandTableColumn(#\"Linhas Filtradas\", \"Data\", {\"Column1\", \"Column2\"}, {\"Data.Column1\", \"Data.Column2\"}),\r",
+          "    #\"Colunas Removidas1\" = Table.RemoveColumns(#\"Data Expandido\",{\"Name\"}),\r",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Colunas Removidas1\", [PromoteAllScalars=true]),\r",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"UF\", type text}, {\"Regiao\", type text}})\r",
+          "in\r",
           "    #\"Tipo Alterado\""
         ],
         "kind": "m",
@@ -103,12 +103,12 @@
           }
         ],
         "expression": [
-          "let",
-          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),",
-          "    CategoriaProduto_Sheet = Fonte{[Item=\"CategoriaProduto\",Kind=\"Sheet\"]}[Data],",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(CategoriaProduto_Sheet, [PromoteAllScalars=true]),",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"descricao\", type text}})",
-          "in",
+          "let\r",
+          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),\r",
+          "    CategoriaProduto_Sheet = Fonte{[Item=\"CategoriaProduto\",Kind=\"Sheet\"]}[Data],\r",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(CategoriaProduto_Sheet, [PromoteAllScalars=true]),\r",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"descricao\", type text}})\r",
+          "in\r",
           "    #\"Tipo Alterado\""
         ],
         "kind": "m",
@@ -127,12 +127,12 @@
           }
         ],
         "expression": [
-          "let",
-          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),",
-          "    ClientesVendedores_Sheet = Fonte{[Item=\"ClientesVendedores\",Kind=\"Sheet\"]}[Data],",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(ClientesVendedores_Sheet, [PromoteAllScalars=true]),",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"cliente_id\", Int64.Type}, {\"vendedor_id\", Int64.Type}})",
-          "in",
+          "let\r",
+          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),\r",
+          "    ClientesVendedores_Sheet = Fonte{[Item=\"ClientesVendedores\",Kind=\"Sheet\"]}[Data],\r",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(ClientesVendedores_Sheet, [PromoteAllScalars=true]),\r",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"cliente_id\", Int64.Type}, {\"vendedor_id\", Int64.Type}})\r",
+          "in\r",
           "    #\"Tipo Alterado\""
         ],
         "kind": "m",
@@ -151,12 +151,12 @@
           }
         ],
         "expression": [
-          "let",
-          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),",
-          "    Supervisor_Sheet = Fonte{[Item=\"Supervisor\",Kind=\"Sheet\"]}[Data],",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Supervisor_Sheet, [PromoteAllScalars=true]),",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"descricao\", type text}, {\"gerente_id\", Int64.Type}, {\"gerente_descricao\", type text}})",
-          "in",
+          "let\r",
+          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),\r",
+          "    Supervisor_Sheet = Fonte{[Item=\"Supervisor\",Kind=\"Sheet\"]}[Data],\r",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Supervisor_Sheet, [PromoteAllScalars=true]),\r",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"descricao\", type text}, {\"gerente_id\", Int64.Type}, {\"gerente_descricao\", type text}})\r",
+          "in\r",
           "    #\"Tipo Alterado\""
         ],
         "kind": "m",
@@ -1841,6 +1841,17 @@
               ""
             ],
             "lineageTag": "2113ddbf-0393-45ce-9e92-c7f632fc5129"
+          },
+          {
+            "name": "itenm mais vendido",
+            "expression": [
+              "",
+              "    CALCULATE(",
+              "    MAXX(fVendas, RELATED(dProduto[descricao]),TRUE),",
+              "    fVendas[vendedor_id]",
+              "    )"
+            ],
+            "lineageTag": "7e49af03-4ab3-426e-b1ba-29416fa31753"
           }
         ],
         "partitions": [

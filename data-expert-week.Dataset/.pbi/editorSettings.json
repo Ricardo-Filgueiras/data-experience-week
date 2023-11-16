@@ -2,4 +2,5 @@
   "version": "1.0",
   "parallelQueryLoading": true,
   "relationshipImportEnabled": true
+
 }
