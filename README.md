@@ -36,3 +36,11 @@ Se você tiver sugestões, encontrou problemas ou deseja contribuir, sinta-se à
 
 Aindo estou trabalhando nesse projeto e corrigindo alguns erros, algumas funcionalidades serão adicionadas.
 
+Aqui vão algumas imagens ilustrativas do projeto. 
+![image](https://github.com/Ricardo-Filgueiras/data-experience-week/assets/107813151/cd875010-70a3-4cb5-ac23-0f21d0673b92)
+
+
+Exemplop de dica de ferramenta com imagen do vendedor.
+
+![image](https://github.com/Ricardo-Filgueiras/data-experience-week/assets/107813151/e9d1c8df-03aa-44c7-b057-40972623e521)
+
