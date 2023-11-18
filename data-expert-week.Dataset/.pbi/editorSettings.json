@@ -1,6 +1,13 @@
 {
   "version": "1.0",
+<<<<<<< HEAD
   "parallelQueryLoading": true,
   "relationshipImportEnabled": true
 
+=======
+  "autodetectRelationships": true,
+  "parallelQueryLoading": true,
+  "typeDetectionEnabled": true,
+  "relationshipImportEnabled": true,
+>>>>>>> parent of 5b3a258 (problema resolvido)
 }
