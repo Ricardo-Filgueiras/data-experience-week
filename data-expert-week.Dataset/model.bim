@@ -8,7 +8,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.122.746.0 (23.10)"
+        "value": "2.120.731.0 (23.08)"
       },
       {
         "name": "PBI_ProTooling",
@@ -16,7 +16,7 @@
       },
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"dCalendario-pwq\",\"dProduto\",\"dVendedor\",\"dCliente\",\"fVendas\",\"fMetas\",\"Medidas\",\"Geografia\",\"RegioesBrasil\",\"Meta_2022\",\"ClientesVendedores\",\"Supervisor\",\"CategoriaProduto\",\"fx_dias_uteis_mes\",\"Meta_2023\",\"ItensVendas\",\"Vendas\",\"fx_dias_uteis_trimestre\",\"Foto Produto\",\"Foto Vendedor\"]"
+        "value": "[\"dCalendario-pwq\",\"dProduto\",\"dVendedor\",\"dCliente\",\"fVendas\",\"fMetas\",\"Medidas\",\"Geografia\",\"RegioesBrasil\",\"Meta_2022\",\"ClientesVendedores\",\"Supervisor\",\"CategoriaProduto\",\"fx_dias_uteis_mes\",\"Meta_2023\",\"ItensVendas\",\"Vendas\",\"fx_dias_uteis_trimestre\",\"Foto Produto\",\"Foto Vendedor\",\"vendedor\"]"
       }
     ],
     "culture": "pt-BR",
@@ -52,12 +52,12 @@
           }
         ],
         "expression": [
-          "let\r",
-          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),\r",
-          "    Geografia_Sheet = Fonte{[Item=\"Geografia\",Kind=\"Sheet\"]}[Data],\r",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Geografia_Sheet, [PromoteAllScalars=true]),\r",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"cidade\", type text}, {\"uf\", type text}, {\"estado\", type text}})\r",
-          "in\r",
+          "let",
+          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),",
+          "    Geografia_Sheet = Fonte{[Item=\"Geografia\",Kind=\"Sheet\"]}[Data],",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Geografia_Sheet, [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"cidade\", type text}, {\"uf\", type text}, {\"estado\", type text}})",
+          "in",
           "    #\"Tipo Alterado\""
         ],
         "kind": "m",
@@ -76,15 +76,15 @@
           }
         ],
         "expression": [
-          "let\r",
-          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),\r",
-          "    #\"Colunas Removidas\" = Table.RemoveColumns(Fonte,{\"Item\", \"Kind\", \"Hidden\"}),\r",
-          "    #\"Linhas Filtradas\" = Table.SelectRows(#\"Colunas Removidas\", each ([Name] = \"RegioesBrasil\")),\r",
-          "    #\"Data Expandido\" = Table.ExpandTableColumn(#\"Linhas Filtradas\", \"Data\", {\"Column1\", \"Column2\"}, {\"Data.Column1\", \"Data.Column2\"}),\r",
-          "    #\"Colunas Removidas1\" = Table.RemoveColumns(#\"Data Expandido\",{\"Name\"}),\r",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Colunas Removidas1\", [PromoteAllScalars=true]),\r",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"UF\", type text}, {\"Regiao\", type text}})\r",
-          "in\r",
+          "let",
+          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),",
+          "    #\"Colunas Removidas\" = Table.RemoveColumns(Fonte,{\"Item\", \"Kind\", \"Hidden\"}),",
+          "    #\"Linhas Filtradas\" = Table.SelectRows(#\"Colunas Removidas\", each ([Name] = \"RegioesBrasil\")),",
+          "    #\"Data Expandido\" = Table.ExpandTableColumn(#\"Linhas Filtradas\", \"Data\", {\"Column1\", \"Column2\"}, {\"Data.Column1\", \"Data.Column2\"}),",
+          "    #\"Colunas Removidas1\" = Table.RemoveColumns(#\"Data Expandido\",{\"Name\"}),",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Colunas Removidas1\", [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"UF\", type text}, {\"Regiao\", type text}})",
+          "in",
           "    #\"Tipo Alterado\""
         ],
         "kind": "m",
@@ -103,12 +103,12 @@
           }
         ],
         "expression": [
-          "let\r",
-          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),\r",
-          "    CategoriaProduto_Sheet = Fonte{[Item=\"CategoriaProduto\",Kind=\"Sheet\"]}[Data],\r",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(CategoriaProduto_Sheet, [PromoteAllScalars=true]),\r",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"descricao\", type text}})\r",
-          "in\r",
+          "let",
+          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),",
+          "    CategoriaProduto_Sheet = Fonte{[Item=\"CategoriaProduto\",Kind=\"Sheet\"]}[Data],",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(CategoriaProduto_Sheet, [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"descricao\", type text}})",
+          "in",
           "    #\"Tipo Alterado\""
         ],
         "kind": "m",
@@ -127,12 +127,12 @@
           }
         ],
         "expression": [
-          "let\r",
-          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),\r",
-          "    ClientesVendedores_Sheet = Fonte{[Item=\"ClientesVendedores\",Kind=\"Sheet\"]}[Data],\r",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(ClientesVendedores_Sheet, [PromoteAllScalars=true]),\r",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"cliente_id\", Int64.Type}, {\"vendedor_id\", Int64.Type}})\r",
-          "in\r",
+          "let",
+          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),",
+          "    ClientesVendedores_Sheet = Fonte{[Item=\"ClientesVendedores\",Kind=\"Sheet\"]}[Data],",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(ClientesVendedores_Sheet, [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"cliente_id\", Int64.Type}, {\"vendedor_id\", Int64.Type}})",
+          "in",
           "    #\"Tipo Alterado\""
         ],
         "kind": "m",
@@ -151,12 +151,12 @@
           }
         ],
         "expression": [
-          "let\r",
-          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),\r",
-          "    Supervisor_Sheet = Fonte{[Item=\"Supervisor\",Kind=\"Sheet\"]}[Data],\r",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Supervisor_Sheet, [PromoteAllScalars=true]),\r",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"descricao\", type text}, {\"gerente_id\", Int64.Type}, {\"gerente_descricao\", type text}})\r",
-          "in\r",
+          "let",
+          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),",
+          "    Supervisor_Sheet = Fonte{[Item=\"Supervisor\",Kind=\"Sheet\"]}[Data],",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Supervisor_Sheet, [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"descricao\", type text}, {\"gerente_id\", Int64.Type}, {\"gerente_descricao\", type text}})",
+          "in",
           "    #\"Tipo Alterado\""
         ],
         "kind": "m",
@@ -175,12 +175,12 @@
           }
         ],
         "expression": [
-          "let\r",
-          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),\r",
-          "    Vendas_Sheet = Fonte{[Item=\"Vendas\",Kind=\"Sheet\"]}[Data],\r",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Vendas_Sheet, [PromoteAllScalars=true]),\r",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"data\", type date}, {\"nfe\", type text}, {\"cliente_id\", Int64.Type}, {\"nf_desconto\", type number}, {\"valor_bruto\", Int64.Type}, {\"valor_venda\", type number}})\r",
-          "in\r",
+          "let",
+          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),",
+          "    Vendas_Sheet = Fonte{[Item=\"Vendas\",Kind=\"Sheet\"]}[Data],",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Vendas_Sheet, [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"data\", type date}, {\"nfe\", type text}, {\"cliente_id\", Int64.Type}, {\"nf_desconto\", type number}, {\"valor_bruto\", Int64.Type}, {\"valor_venda\", type number}})",
+          "in",
           "    #\"Tipo Alterado\""
         ],
         "kind": "m",
@@ -199,12 +199,12 @@
           }
         ],
         "expression": [
-          "let\r",
-          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),\r",
-          "    ItensVendas_Sheet = Fonte{[Item=\"ItensVendas\",Kind=\"Sheet\"]}[Data],\r",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(ItensVendas_Sheet, [PromoteAllScalars=true]),\r",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"vendas_id\", Int64.Type}, {\"produto_id\", Int64.Type}, {\"item_quantidade\", Int64.Type}, {\"valor_unitario\", Int64.Type}, {\"valor_bruto\", Int64.Type}})\r",
-          "in\r",
+          "let",
+          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\BaseDadosOLTP.xlsx\"), null, true),",
+          "    ItensVendas_Sheet = Fonte{[Item=\"ItensVendas\",Kind=\"Sheet\"]}[Data],",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(ItensVendas_Sheet, [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"vendas_id\", Int64.Type}, {\"produto_id\", Int64.Type}, {\"item_quantidade\", Int64.Type}, {\"valor_unitario\", Int64.Type}, {\"valor_bruto\", Int64.Type}})",
+          "in",
           "    #\"Tipo Alterado\""
         ],
         "kind": "m",
@@ -223,17 +223,17 @@
           }
         ],
         "expression": [
-          "(ano,mes) =>\r",
-          "\r",
-          "let\r",
-          "    //ano = 2022,\r",
-          "    //mes = 1, \r",
-          "    Fonte = #\"dCalendario-pwq\",\r",
-          "    #\"Linhas Filtradas\" = Table.SelectRows(Fonte, each ([DiaSemana] <> 0 and [DiaSemana] <> 6)),\r",
-          "    #\"Outras Colunas Removidas\" = Table.SelectColumns(#\"Linhas Filtradas\",{ \"Data\", \"Ano\", \"MesNum\"}),\r",
-          "    tabela_filtrada = Table.SelectRows(#\"Outras Colunas Removidas\", each ([Ano] = ano) and ([MesNum] = mes)),\r",
-          "    #\"Personalização Adicionada\" = Table.AddColumn(tabela_filtrada, \"qtde_dias_uteis\", each Table.RowCount(tabela_filtrada))\r",
-          "in\r",
+          "(ano,mes) =>",
+          "",
+          "let",
+          "    //ano = 2022,",
+          "    //mes = 1, ",
+          "    Fonte = #\"dCalendario-pwq\",",
+          "    #\"Linhas Filtradas\" = Table.SelectRows(Fonte, each ([DiaSemana] <> 0 and [DiaSemana] <> 6)),",
+          "    #\"Outras Colunas Removidas\" = Table.SelectColumns(#\"Linhas Filtradas\",{ \"Data\", \"Ano\", \"MesNum\"}),",
+          "    tabela_filtrada = Table.SelectRows(#\"Outras Colunas Removidas\", each ([Ano] = ano) and ([MesNum] = mes)),",
+          "    #\"Personalização Adicionada\" = Table.AddColumn(tabela_filtrada, \"qtde_dias_uteis\", each Table.RowCount(tabela_filtrada))",
+          "in",
           "    #\"Personalização Adicionada\""
         ],
         "kind": "m",
@@ -253,29 +253,29 @@
           }
         ],
         "expression": [
-          "let\r",
-          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\Meta_2023.xlsx\"), null, true),\r",
-          "    #\"Colunas Removidas\" = Table.RemoveColumns(Fonte,{\"Item\", \"Kind\", \"Hidden\"}),\r",
-          "    #\"Data Expandido\" = Table.ExpandTableColumn(#\"Colunas Removidas\", \"Data\", {\"Column1\", \"Column2\", \"Column3\", \"Column4\", \"Column5\", \"Column6\", \"Column7\"}, {\"Data.Column1\", \"Data.Column2\", \"Data.Column3\", \"Data.Column4\", \"Data.Column5\", \"Data.Column6\", \"Data.Column7\"}),\r",
-          "    #\"Linhas Filtradas\" = Table.SelectRows(#\"Data Expandido\", each ([Data.Column2] <> null)),\r",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Linhas Filtradas\", [PromoteAllScalars=true]),\r",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"1 - Victor Castro\", type text}, {\"Categoria Produto\", type text}, {\"Previsão Vendas\", type any}, {\"1\", type number}, {\"2\", type number}, {\"3\", type number}, {\"4\", type number}, {\"Total\", type any}}),\r",
-          "    #\"Linhas Filtradas1\" = Table.SelectRows(#\"Tipo Alterado\", each ([Previsão Vendas] <> \"Previsão Vendas\")),\r",
-          "    #\"Colunas Removidas1\" = Table.RemoveColumns(#\"Linhas Filtradas1\",{\"Total\"}),\r",
-          "    #\"Colunas Não Dinâmicas\" = Table.UnpivotOtherColumns(#\"Colunas Removidas1\", {\"1 - Victor Castro\", \"Categoria Produto\", \"Previsão Vendas\"}, \"Atributo\", \"Valor\"),\r",
-          "    #\"Colunas Renomeadas\" = Table.RenameColumns(#\"Colunas Não Dinâmicas\",{{\"Atributo\", \"trimeste\"}, {\"Valor\", \"fator\"}, {\"1 - Victor Castro\", \"gerente_id\"}, {\"Categoria Produto\", \"Categoria_id\"}}),\r",
-          "    #\"Multiplicação Inserida\" = Table.AddColumn(#\"Colunas Renomeadas\", \"valor_trimestre\", each [Previsão Vendas] * [fator], type number),\r",
-          "    #\"Colunas Removidas2\" = Table.RemoveColumns(#\"Multiplicação Inserida\",{\"Previsão Vendas\", \"fator\"}),\r",
-          "    #\"Texto Extraído Antes do Delimitador\" = Table.TransformColumns(#\"Colunas Removidas2\", {{\"gerente_id\", each Text.BeforeDelimiter(_, \" \"), type text}, {\"Categoria_id\", each Text.BeforeDelimiter(_, \" \"), type text}}),\r",
-          "    #\"Tipo Alterado1\" = Table.TransformColumnTypes(#\"Texto Extraído Antes do Delimitador\",{{\"gerente_id\", Int64.Type}, {\"Categoria_id\", Int64.Type}, {\"trimeste\", Int64.Type}, {\"valor_trimestre\", Int64.Type}}),\r",
-          "    #\"Função Personalizada Invocada\" = Table.AddColumn(#\"Tipo Alterado1\", \"qtde_dias_uteis\", each fx_dias_uteis_trimestre(2023, [trimeste])),\r",
-          "    #\"qtde_dias_uteis Expandido\" = Table.ExpandTableColumn(#\"Função Personalizada Invocada\", \"qtde_dias_uteis\", {\"Data\", \"qtde_dias_uteis\"}, {\"qtde_dias_uteis.Data\", \"qtde_dias_uteis.qtde_dias_uteis\"}),\r",
-          "    #\"Personalização Adicionada\" = Table.AddColumn(#\"qtde_dias_uteis Expandido\", \"meta_diaria\", each [valor_trimestre]/[qtde_dias_uteis.qtde_dias_uteis]),\r",
-          "    #\"Tipo Alterado2\" = Table.TransformColumnTypes(#\"Personalização Adicionada\",{{\"qtde_dias_uteis.Data\", type date}, {\"meta_diaria\", type number}}),\r",
-          "    #\"Colunas Renomeadas1\" = Table.RenameColumns(#\"Tipo Alterado2\",{{\"qtde_dias_uteis.Data\", \"Data\"}, {\"meta_diaria\", \"valor\"}}),\r",
-          "    #\"Outras Colunas Removidas\" = Table.SelectColumns(#\"Colunas Renomeadas1\",{\"gerente_id\", \"Categoria_id\", \"Data\", \"valor\"}),\r",
-          "    #\"Colunas Renomeadas2\" = Table.RenameColumns(#\"Outras Colunas Removidas\",{{\"Categoria_id\", \"categoria_id\"}})\r",
-          "in\r",
+          "let",
+          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\Meta_2023.xlsx\"), null, true),",
+          "    #\"Colunas Removidas\" = Table.RemoveColumns(Fonte,{\"Item\", \"Kind\", \"Hidden\"}),",
+          "    #\"Data Expandido\" = Table.ExpandTableColumn(#\"Colunas Removidas\", \"Data\", {\"Column1\", \"Column2\", \"Column3\", \"Column4\", \"Column5\", \"Column6\", \"Column7\"}, {\"Data.Column1\", \"Data.Column2\", \"Data.Column3\", \"Data.Column4\", \"Data.Column5\", \"Data.Column6\", \"Data.Column7\"}),",
+          "    #\"Linhas Filtradas\" = Table.SelectRows(#\"Data Expandido\", each ([Data.Column2] <> null)),",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Linhas Filtradas\", [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"1 - Victor Castro\", type text}, {\"Categoria Produto\", type text}, {\"Previsão Vendas\", type any}, {\"1\", type number}, {\"2\", type number}, {\"3\", type number}, {\"4\", type number}, {\"Total\", type any}}),",
+          "    #\"Linhas Filtradas1\" = Table.SelectRows(#\"Tipo Alterado\", each ([Previsão Vendas] <> \"Previsão Vendas\")),",
+          "    #\"Colunas Removidas1\" = Table.RemoveColumns(#\"Linhas Filtradas1\",{\"Total\"}),",
+          "    #\"Colunas Não Dinâmicas\" = Table.UnpivotOtherColumns(#\"Colunas Removidas1\", {\"1 - Victor Castro\", \"Categoria Produto\", \"Previsão Vendas\"}, \"Atributo\", \"Valor\"),",
+          "    #\"Colunas Renomeadas\" = Table.RenameColumns(#\"Colunas Não Dinâmicas\",{{\"Atributo\", \"trimeste\"}, {\"Valor\", \"fator\"}, {\"1 - Victor Castro\", \"gerente_id\"}, {\"Categoria Produto\", \"Categoria_id\"}}),",
+          "    #\"Multiplicação Inserida\" = Table.AddColumn(#\"Colunas Renomeadas\", \"valor_trimestre\", each [Previsão Vendas] * [fator], type number),",
+          "    #\"Colunas Removidas2\" = Table.RemoveColumns(#\"Multiplicação Inserida\",{\"Previsão Vendas\", \"fator\"}),",
+          "    #\"Texto Extraído Antes do Delimitador\" = Table.TransformColumns(#\"Colunas Removidas2\", {{\"gerente_id\", each Text.BeforeDelimiter(_, \" \"), type text}, {\"Categoria_id\", each Text.BeforeDelimiter(_, \" \"), type text}}),",
+          "    #\"Tipo Alterado1\" = Table.TransformColumnTypes(#\"Texto Extraído Antes do Delimitador\",{{\"gerente_id\", Int64.Type}, {\"Categoria_id\", Int64.Type}, {\"trimeste\", Int64.Type}, {\"valor_trimestre\", Int64.Type}}),",
+          "    #\"Função Personalizada Invocada\" = Table.AddColumn(#\"Tipo Alterado1\", \"qtde_dias_uteis\", each fx_dias_uteis_trimestre(2023, [trimeste])),",
+          "    #\"qtde_dias_uteis Expandido\" = Table.ExpandTableColumn(#\"Função Personalizada Invocada\", \"qtde_dias_uteis\", {\"Data\", \"qtde_dias_uteis\"}, {\"qtde_dias_uteis.Data\", \"qtde_dias_uteis.qtde_dias_uteis\"}),",
+          "    #\"Personalização Adicionada\" = Table.AddColumn(#\"qtde_dias_uteis Expandido\", \"meta_diaria\", each [valor_trimestre]/[qtde_dias_uteis.qtde_dias_uteis]),",
+          "    #\"Tipo Alterado2\" = Table.TransformColumnTypes(#\"Personalização Adicionada\",{{\"qtde_dias_uteis.Data\", type date}, {\"meta_diaria\", type number}}),",
+          "    #\"Colunas Renomeadas1\" = Table.RenameColumns(#\"Tipo Alterado2\",{{\"qtde_dias_uteis.Data\", \"Data\"}, {\"meta_diaria\", \"valor\"}}),",
+          "    #\"Outras Colunas Removidas\" = Table.SelectColumns(#\"Colunas Renomeadas1\",{\"gerente_id\", \"Categoria_id\", \"Data\", \"valor\"}),",
+          "    #\"Colunas Renomeadas2\" = Table.RenameColumns(#\"Outras Colunas Removidas\",{{\"Categoria_id\", \"categoria_id\"}})",
+          "in",
           "    #\"Colunas Renomeadas2\""
         ],
         "kind": "m",
@@ -294,17 +294,17 @@
           }
         ],
         "expression": [
-          "(ano,Trimestre) =>\r",
-          "\r",
-          "let\r",
-          "    //ano = 2022,\r",
-          "    //mes = 1, \r",
-          "    Fonte = #\"dCalendario-pwq\",\r",
-          "    #\"Linhas Filtradas\" = Table.SelectRows(Fonte, each ([DiaSemana] <> 0 and [DiaSemana] <> 6)),\r",
-          "    #\"Outras Colunas Removidas\" = Table.SelectColumns(#\"Linhas Filtradas\",{ \"Data\", \"Ano\", \"Trimestre\"}),\r",
-          "    tabela_filtrada = Table.SelectRows(#\"Outras Colunas Removidas\", each ([Ano] = ano) and ([Trimestre] = Trimestre)),\r",
-          "    #\"Personalização Adicionada\" = Table.AddColumn(tabela_filtrada, \"qtde_dias_uteis\", each Table.RowCount(tabela_filtrada))\r",
-          "in\r",
+          "(ano,Trimestre) =>",
+          "",
+          "let",
+          "    //ano = 2022,",
+          "    //mes = 1, ",
+          "    Fonte = #\"dCalendario-pwq\",",
+          "    #\"Linhas Filtradas\" = Table.SelectRows(Fonte, each ([DiaSemana] <> 0 and [DiaSemana] <> 6)),",
+          "    #\"Outras Colunas Removidas\" = Table.SelectColumns(#\"Linhas Filtradas\",{ \"Data\", \"Ano\", \"Trimestre\"}),",
+          "    tabela_filtrada = Table.SelectRows(#\"Outras Colunas Removidas\", each ([Ano] = ano) and ([Trimestre] = Trimestre)),",
+          "    #\"Personalização Adicionada\" = Table.AddColumn(tabela_filtrada, \"qtde_dias_uteis\", each Table.RowCount(tabela_filtrada))",
+          "in",
           "    #\"Personalização Adicionada\""
         ],
         "kind": "m",
@@ -324,21 +324,21 @@
           }
         ],
         "expression": [
-          "let\r",
-          "    Fonte = Csv.Document(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\Meta_2022.csv\"),[Delimiter=\",\", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),\r",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),\r",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"Mês\", type date}, {\"gerente_id\", Int64.Type}, {\"categoria_id\", Int64.Type}, {\"$ Meta\", Int64.Type}}),\r",
-          "    #\"Ano Inserido\" = Table.AddColumn(#\"Tipo Alterado\", \"Ano\", each Date.Year([Mês]), Int64.Type),\r",
-          "    #\"Mês Inserido\" = Table.AddColumn(#\"Ano Inserido\", \"MesNum\", each Date.Month([Mês]), Int64.Type),\r",
-          "    #\"Função Personalizada Invocada\" = Table.AddColumn(#\"Mês Inserido\", \"dias_uteis\", each fx_dias_uteis_mes([Ano], [MesNum])),\r",
-          "    #\"dias_uteis Expandido\" = Table.ExpandTableColumn(#\"Função Personalizada Invocada\", \"dias_uteis\", {\"Data\", \"qtde_dias_uteis\"}, {\"dias_uteis.Data\", \"dias_uteis.qtde_dias_uteis\"}),\r",
-          "    #\"Colunas Renomeadas\" = Table.RenameColumns(#\"dias_uteis Expandido\",{{\"dias_uteis.qtde_dias_uteis\", \"qtde_dias_uteis\"}, {\"dias_uteis.Data\", \"Data\"}}),\r",
-          "    #\"Personalização Adicionada\" = Table.AddColumn(#\"Colunas Renomeadas\", \"meta_diaria\", each [#\"$ Meta\"]/[qtde_dias_uteis]),\r",
-          "    #\"Outras Colunas Removidas\" = Table.SelectColumns(#\"Personalização Adicionada\",{\"Data\", \"meta_diaria\", \"gerente_id\", \"categoria_id\", \"qtde_dias_uteis\"}),\r",
-          "    #\"Tipo Alterado1\" = Table.TransformColumnTypes(#\"Outras Colunas Removidas\",{{\"Data\", type date}, {\"meta_diaria\", type number}, {\"qtde_dias_uteis\", Int64.Type}}),\r",
-          "    #\"Colunas Removidas\" = Table.RemoveColumns(#\"Tipo Alterado1\",{\"qtde_dias_uteis\"}),\r",
-          "    #\"Colunas Renomeadas1\" = Table.RenameColumns(#\"Colunas Removidas\",{{\"meta_diaria\", \"valor\"}})\r",
-          "in\r",
+          "let",
+          "    Fonte = Csv.Document(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\Meta_2022.csv\"),[Delimiter=\",\", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"Mês\", type date}, {\"gerente_id\", Int64.Type}, {\"categoria_id\", Int64.Type}, {\"$ Meta\", Int64.Type}}),",
+          "    #\"Ano Inserido\" = Table.AddColumn(#\"Tipo Alterado\", \"Ano\", each Date.Year([Mês]), Int64.Type),",
+          "    #\"Mês Inserido\" = Table.AddColumn(#\"Ano Inserido\", \"MesNum\", each Date.Month([Mês]), Int64.Type),",
+          "    #\"Função Personalizada Invocada\" = Table.AddColumn(#\"Mês Inserido\", \"dias_uteis\", each fx_dias_uteis_mes([Ano], [MesNum])),",
+          "    #\"dias_uteis Expandido\" = Table.ExpandTableColumn(#\"Função Personalizada Invocada\", \"dias_uteis\", {\"Data\", \"qtde_dias_uteis\"}, {\"dias_uteis.Data\", \"dias_uteis.qtde_dias_uteis\"}),",
+          "    #\"Colunas Renomeadas\" = Table.RenameColumns(#\"dias_uteis Expandido\",{{\"dias_uteis.qtde_dias_uteis\", \"qtde_dias_uteis\"}, {\"dias_uteis.Data\", \"Data\"}}),",
+          "    #\"Personalização Adicionada\" = Table.AddColumn(#\"Colunas Renomeadas\", \"meta_diaria\", each [#\"$ Meta\"]/[qtde_dias_uteis]),",
+          "    #\"Outras Colunas Removidas\" = Table.SelectColumns(#\"Personalização Adicionada\",{\"Data\", \"meta_diaria\", \"gerente_id\", \"categoria_id\", \"qtde_dias_uteis\"}),",
+          "    #\"Tipo Alterado1\" = Table.TransformColumnTypes(#\"Outras Colunas Removidas\",{{\"Data\", type date}, {\"meta_diaria\", type number}, {\"qtde_dias_uteis\", Int64.Type}}),",
+          "    #\"Colunas Removidas\" = Table.RemoveColumns(#\"Tipo Alterado1\",{\"qtde_dias_uteis\"}),",
+          "    #\"Colunas Renomeadas1\" = Table.RenameColumns(#\"Colunas Removidas\",{{\"meta_diaria\", \"valor\"}})",
+          "in",
           "    #\"Colunas Renomeadas1\""
         ],
         "kind": "m",
@@ -357,13 +357,13 @@
           }
         ],
         "expression": [
-          "let\r",
-          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\PinskiDatabase_Fotos.xlsx\"), null, true),\r",
-          "    #\"Foto Produto_Sheet\" = Fonte{[Item=\"Foto Produto\",Kind=\"Sheet\"]}[Data],\r",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Foto Produto_Sheet\",{{\"Column1\", type text}, {\"Column2\", type text}}),\r",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Tipo Alterado\", [PromoteAllScalars=true]),\r",
-          "    #\"Tipo Alterado1\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"Produto\", type text}, {\"URL\", type text}})\r",
-          "in\r",
+          "let",
+          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\PinskiDatabase_Fotos.xlsx\"), null, true),",
+          "    #\"Foto Produto_Sheet\" = Fonte{[Item=\"Foto Produto\",Kind=\"Sheet\"]}[Data],",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Foto Produto_Sheet\",{{\"Column1\", type text}, {\"Column2\", type text}}),",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Tipo Alterado\", [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado1\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"Produto\", type text}, {\"URL\", type text}})",
+          "in",
           "    #\"Tipo Alterado1\""
         ],
         "kind": "m",
@@ -382,16 +382,39 @@
           }
         ],
         "expression": [
-          "let\r",
-          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\PinskiDatabase_Fotos.xlsx\"), null, true),\r",
-          "    #\"Foto Vendedor_Sheet\" = Fonte{[Item=\"Foto Vendedor\",Kind=\"Sheet\"]}[Data],\r",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Foto Vendedor_Sheet\", [PromoteAllScalars=true]),\r",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id_vendedor\", Int64.Type}, {\"URL\", type text}})\r",
-          "in\r",
+          "let",
+          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\PinskiDatabase_Fotos.xlsx\"), null, true),",
+          "    #\"Foto Vendedor_Sheet\" = Fonte{[Item=\"Foto Vendedor\",Kind=\"Sheet\"]}[Data],",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Foto Vendedor_Sheet\", [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id_vendedor\", Int64.Type}, {\"URL\", type text}})",
+          "in",
           "    #\"Tipo Alterado\""
         ],
         "kind": "m",
         "lineageTag": "99c3f269-3a4c-4b92-8344-eacb8c0a6e94"
+      },
+      {
+        "name": "vendedor",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navegação"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Fonte = Csv.Document(Web.Contents(\"https://raw.githubusercontent.com/Ricardo-Filgueiras/data-experience-week/main/database/vendedor.csv\"),[Delimiter=\";\", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])",
+          "in",
+          "    #\"Cabeçalhos Promovidos\""
+        ],
+        "kind": "m",
+        "lineageTag": "077ff3ba-39b8-46b1-8d32-126b725229ee",
+        "queryGroup": "Origin GitHub"
       }
     ],
     "queryGroups": [
@@ -412,6 +435,16 @@
           }
         ],
         "folder": "Fatos"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "2"
+          }
+        ],
+        "description": "fontes de dados github ou web",
+        "folder": "Origin GitHub"
       }
     ],
     "relationships": [
