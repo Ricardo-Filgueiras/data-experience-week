@@ -1,94 +1,94 @@
-﻿id;categoria_id;descricao;tamanho;custoUnitario
-1;1;Casual Day;M;90
-2;1;Casual Day;P;90
-3;1;Casual Day;G;90
-4;1;Psyco Universe;GG;60
-5;1;Psyco Universe;P;60
-6;1;Psyco Universe;G;60
-7;1;Psyco Universe;M;60
-8;1;Psyco Classic;M;125
-9;1;Psyco Classic;G;125
-10;1;Psyco Classic;P;125
-11;1;Marine Slim;G;95
-12;1;Marine Slim;P;95
-13;1;Marine Slim;M;95
-14;1;Psyco Crew;P;110
-15;1;Psyco Crew;G;110
-16;1;Psyco Crew;M;110
-17;1;Cammelina;M;100
-18;1;Cammelina;G;100
-19;1;Cammelina;P;100
-20;1;Klamath;GG;60
-21;1;Klamath;P;60
-22;1;Klamath;G;60
-23;1;Klamath;M;60
-24;1;Klamath Weed;P;73
-25;1;Klamath Weed;M;73
-26;1;Klamath Weed;G;73
-27;1;Klamath White;M;80
-28;1;Klamath White;P;80
-29;1;Klamath White;G;80
-30;2;Havaiana;M;100
-31;2;Havaiana;P;100
-32;2;Havaiana;G;100
-33;2;Havaiana;GG;100
-34;2;Lilium;M;110
-35;2;Lilium;P;110
-36;2;Lilium;G;110
-37;2;Lilium;GG;110
-38;3;Blazer Slim Fit;M;200
-39;3;Blazer Slim Fit;G;200
-40;3;Blazer Slim Fit;GG;200
-41;3;Blazer Slim Fit;P;200
-42;2;Paeonia;GG;75
-43;2;Paeonia;M;75
-44;2;Paeonia;P;75
-45;2;Paeonia;G;75
-46;2;Roseta;M;115
-47;2;Roseta;P;115
-48;2;Roseta;G;115
-49;2;Roseta;GG;115
-50;3;Blazer Poderoso Chefão;P;360
-51;3;Blazer Poderoso Chefão;G;360
-52;3;Blazer Poderoso Chefão;M;360
-53;3;Blazer Poderoso Chefão;GG;360
-54;2;Intense;P;125
-55;2;Intense;GG;125
-56;2;Intense;G;125
-57;2;Intense;M;125
-58;2;Folhagem;M;130
-59;2;Folhagem;GG;130
-60;2;Folhagem;G;130
-61;2;Folhagem;P;130
-62;2;Caribe;G;78
-63;2;Caribe;P;78
-64;2;Caribe;GG;78
-65;2;Caribe;M;78
-66;2;Tropical;G;70
-67;2;Tropical;P;70
-68;2;Tropical;GG;70
-69;2;Tropical;M;70
-70;2;Canadense;P;105
-71;2;Canadense;M;105
-72;2;Canadense;GG;105
-73;2;Canadense;G;105
-74;2;Cigano;P;115
-75;2;Cigano;GG;115
-76;2;Cigano;M;115
-77;2;Cigano;G;115
-78;2;Porto Rico;M;110
-79;2;Porto Rico;P;110
-80;2;Porto Rico;G;110
-81;2;Porto Rico;GG;110
-82;2;Oriente;P;100
-83;2;Oriente;M;100
-84;2;Oriente;GG;100
-85;2;Oriente;G;100
-86;2;Beach Flash;P;80
-87;2;Beach Flash;G;80
-88;2;Beach Flash;GG;80
-89;2;Beach Flash;M;80
-90;4;Incomparaveis;P;55
-91;4;Incomparaveis;M;55
-92;4;Incomparaveis;G;55
-93;4;Incomparaveis;GG;55
+id,categoria_id,descricao,tamanho,custoUnitario
+1,1,Casual Day,M,90
+2,1,Casual Day,P,90
+3,1,Casual Day,G,90
+4,1,Psyco Universe,GG,60
+5,1,Psyco Universe,P,60
+6,1,Psyco Universe,G,60
+7,1,Psyco Universe,M,60
+8,1,Psyco Classic,M,125
+9,1,Psyco Classic,G,125
+10,1,Psyco Classic,P,125
+11,1,Marine Slim,G,95
+12,1,Marine Slim,P,95
+13,1,Marine Slim,M,95
+14,1,Psyco Crew,P,110
+15,1,Psyco Crew,G,110
+16,1,Psyco Crew,M,110
+17,1,Cammelina,M,100
+18,1,Cammelina,G,100
+19,1,Cammelina,P,100
+20,1,Klamath,GG,60
+21,1,Klamath,P,60
+22,1,Klamath,G,60
+23,1,Klamath,M,60
+24,1,Klamath Weed,P,73
+25,1,Klamath Weed,M,73
+26,1,Klamath Weed,G,73
+27,1,Klamath White,M,80
+28,1,Klamath White,P,80
+29,1,Klamath White,G,80
+30,2,Havaiana,M,100
+31,2,Havaiana,P,100
+32,2,Havaiana,G,100
+33,2,Havaiana,GG,100
+34,2,Lilium,M,110
+35,2,Lilium,P,110
+36,2,Lilium,G,110
+37,2,Lilium,GG,110
+38,3,Blazer Slim Fit,M,200
+39,3,Blazer Slim Fit,G,200
+40,3,Blazer Slim Fit,GG,200
+41,3,Blazer Slim Fit,P,200
+42,2,Paeonia,GG,75
+43,2,Paeonia,M,75
+44,2,Paeonia,P,75
+45,2,Paeonia,G,75
+46,2,Roseta,M,115
+47,2,Roseta,P,115
+48,2,Roseta,G,115
+49,2,Roseta,GG,115
+50,3,Blazer Poderoso Chefão,P,360
+51,3,Blazer Poderoso Chefão,G,360
+52,3,Blazer Poderoso Chefão,M,360
+53,3,Blazer Poderoso Chefão,GG,360
+54,2,Intense,P,125
+55,2,Intense,GG,125
+56,2,Intense,G,125
+57,2,Intense,M,125
+58,2,Folhagem,M,130
+59,2,Folhagem,GG,130
+60,2,Folhagem,G,130
+61,2,Folhagem,P,130
+62,2,Caribe,G,78
+63,2,Caribe,P,78
+64,2,Caribe,GG,78
+65,2,Caribe,M,78
+66,2,Tropical,G,70
+67,2,Tropical,P,70
+68,2,Tropical,GG,70
+69,2,Tropical,M,70
+70,2,Canadense,P,105
+71,2,Canadense,M,105
+72,2,Canadense,GG,105
+73,2,Canadense,G,105
+74,2,Cigano,P,115
+75,2,Cigano,GG,115
+76,2,Cigano,M,115
+77,2,Cigano,G,115
+78,2,Porto Rico,M,110
+79,2,Porto Rico,P,110
+80,2,Porto Rico,G,110
+81,2,Porto Rico,GG,110
+82,2,Oriente,P,100
+83,2,Oriente,M,100
+84,2,Oriente,GG,100
+85,2,Oriente,G,100
+86,2,Beach Flash,P,80
+87,2,Beach Flash,G,80
+88,2,Beach Flash,GG,80
+89,2,Beach Flash,M,80
+90,4,Incomparaveis,P,55
+91,4,Incomparaveis,M,55
+92,4,Incomparaveis,G,55
+93,4,Incomparaveis,GG,55

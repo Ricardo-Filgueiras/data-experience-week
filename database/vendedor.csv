@@ -1,13 +1,13 @@
-﻿id;descricao;supervisor_id
-1;Augusto Bradão;2
-2;Roberto Silva;4
-3;Felipe Gonçalves;5
-4;Isabella Machado;2
-5;Estevan Souza;4
-6;Rodrigo Santiago;3
-7;Flávia Alessandra;3
-8;Julio Lima;4
-9;Mateus Costa;5
-10;Fernanda Oliveira;5
-11;Bruna Maria;2
-12;Flávio Roberto;1
+id,descricao,supervisor_id
+1,Augusto Bradão,2
+2,Roberto Silva,4
+3,Felipe Gonçalves,5
+4,Isabella Machado,2
+5,Estevan Souza,4
+6,Rodrigo Santiago,3
+7,Flávia Alessandra,3
+8,Julio Lima,4
+9,Mateus Costa,5
+10,Fernanda Oliveira,5
+11,Bruna Maria,2
+12,Flávio Roberto,1
