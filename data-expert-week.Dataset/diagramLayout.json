@@ -120,6 +120,16 @@
             "width": 234
           },
           "zIndex": 0
+        },
+        {
+          "location": {},
+          "nodeIndex": "ItensVendas",
+          "nodeLineageTag": "1dd52ead-22e3-4b8e-ac09-9d9e31a096bd",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "Todas as tabelas",
@@ -133,7 +143,7 @@
       "ordinal": 1,
       "scrollPosition": {
         "x": 0,
-        "y": 34
+        "y": 26
       },
       "nodes": [
         {
