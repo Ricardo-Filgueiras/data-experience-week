@@ -8,7 +8,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.123.684.0 (23.11)"
+        "value": "2.120.731.0 (23.08)"
       },
       {
         "name": "PBI_ProTooling",
@@ -287,7 +287,7 @@
         ],
         "expression": [
           "let",
-          "    Fonte = Csv.Document(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\Meta_2022.csv\"),[Delimiter=\",\", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    Fonte = Csv.Document(Web.Contents(\"https://raw.githubusercontent.com/Ricardo-Filgueiras/data-experience-week/main/database/Meta_2022.csv\"),[Delimiter=\",\", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
           "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),",
           "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"Mês\", type date}, {\"gerente_id\", Int64.Type}, {\"categoria_id\", Int64.Type}, {\"$ Meta\", Int64.Type}}),",
           "    #\"Ano Inserido\" = Table.AddColumn(#\"Tipo Alterado\", \"Ano\", each Date.Year([Mês]), Int64.Type),",
@@ -320,13 +320,12 @@
         ],
         "expression": [
           "let",
-          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\PinskiDatabase_Fotos.xlsx\"), null, true),",
-          "    #\"Foto Produto_Sheet\" = Fonte{[Item=\"Foto Produto\",Kind=\"Sheet\"]}[Data],",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Foto Produto_Sheet\",{{\"Column1\", type text}, {\"Column2\", type text}}),",
+          "    Fonte = Csv.Document(Web.Contents(\"https://raw.githubusercontent.com/Ricardo-Filgueiras/data-experience-week/main/database/FotoProduto-PinskiDatabase_Fotos.csv\"),[Delimiter=\";\", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(Fonte,{{\"Column1\", type text}, {\"Column2\", type text}}),",
           "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Tipo Alterado\", [PromoteAllScalars=true]),",
-          "    #\"Tipo Alterado1\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"Produto\", type text}, {\"URL\", type text}})",
+          "    #\"Colunas Removidas\" = Table.RemoveColumns(#\"Cabeçalhos Promovidos\",{\"\", \"_1\"})",
           "in",
-          "    #\"Tipo Alterado1\""
+          "    #\"Colunas Removidas\""
         ],
         "kind": "m",
         "lineageTag": "b5ae8185-e8ae-4543-80e6-38bb5a909554"
@@ -345,12 +344,12 @@
         ],
         "expression": [
           "let",
-          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\PinskiDatabase_Fotos.xlsx\"), null, true),",
-          "    #\"Foto Vendedor_Sheet\" = Fonte{[Item=\"Foto Vendedor\",Kind=\"Sheet\"]}[Data],",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Foto Vendedor_Sheet\", [PromoteAllScalars=true]),",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id_vendedor\", Int64.Type}, {\"URL\", type text}})",
+          "    Fonte = Csv.Document(Web.Contents(\"https://raw.githubusercontent.com/Ricardo-Filgueiras/data-experience-week/main/database/FotoVendedor-PinskiDatabase_Fotos.csv\"),[Delimiter=\",\", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id_vendedor\", Int64.Type}, {\"URL\", type text}}),",
+          "    #\"Colunas Removidas\" = Table.RemoveColumns(#\"Tipo Alterado\",{\"\", \"_1\"})",
           "in",
-          "    #\"Tipo Alterado\""
+          "    #\"Colunas Removidas\""
         ],
         "kind": "m",
         "lineageTag": "99c3f269-3a4c-4b92-8344-eacb8c0a6e94"
@@ -584,6 +583,28 @@
         "kind": "m",
         "lineageTag": "42abf33e-166d-4b6b-8995-1f169faeb541",
         "queryGroup": "Origin GitHub"
+      },
+      {
+        "name": "fMetas",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navegação"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Exception"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Fonte = Table.Combine({Meta_2023, Meta_2022})",
+          "in",
+          "    Fonte"
+        ],
+        "kind": "m",
+        "lineageTag": "83ed3567-d31c-4d34-a98b-0c345c13823b",
+        "queryGroup": "Fatos"
       }
     ],
     "queryGroups": [
@@ -639,13 +660,6 @@
         "toTable": "dCalendario-pwq"
       },
       {
-        "name": "6996cba6-04e7-4b4e-b707-77ce89d4ab2d",
-        "fromColumn": "Data",
-        "fromTable": "fMetas",
-        "toColumn": "Data",
-        "toTable": "dCalendario-pwq"
-      },
-      {
         "name": "04b273f4-46ec-4700-9a9a-1bc50c372b4d",
         "crossFilteringBehavior": "bothDirections",
         "fromColumn": "gerente_id",
@@ -653,30 +667,6 @@
         "isActive": false,
         "toColumn": "gerente_id",
         "toTable": "dgerente"
-      },
-      {
-        "name": "27bf6c51-d096-43ee-ac85-a35b43c7b801",
-        "fromColumn": "gerente_id",
-        "fromTable": "fMetas",
-        "isActive": false,
-        "toColumn": "gerente_id",
-        "toTable": "dgerente"
-      },
-      {
-        "name": "f404e11c-b8e3-4301-b749-3e3d2d9fd655",
-        "fromColumn": "gerente_id",
-        "fromTable": "fMetas",
-        "toCardinality": "many",
-        "toColumn": "gerente_id",
-        "toTable": "dVendedor"
-      },
-      {
-        "name": "cf8ca12e-6544-43b4-bf45-9b4dbda81c52",
-        "fromColumn": "categoria_id",
-        "fromTable": "fMetas",
-        "toCardinality": "many",
-        "toColumn": "categoria_id",
-        "toTable": "dProduto"
       },
       {
         "name": "53681483-9d1d-4f5c-8994-7a82a28f310f",
@@ -937,7 +927,7 @@
             "formatString": "0",
             "lineageTag": "e6d74cc1-7925-4140-9a65-1de355cc5ec4",
             "sourceColumn": "Ano",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           },
           {
             "name": "NomeMes",
@@ -999,7 +989,7 @@
             "dataType": "double",
             "lineageTag": "02ce559b-e29e-4ed7-9505-62bf46e07a93",
             "sourceColumn": "MesNum",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           },
           {
             "name": "AnoMesINT",
@@ -1016,7 +1006,7 @@
             "dataType": "double",
             "lineageTag": "19217d1c-34f3-436e-8208-ff6c08304965",
             "sourceColumn": "AnoMesINT",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           },
           {
             "name": "InicioMes",
@@ -1048,7 +1038,7 @@
             "formatString": "0",
             "lineageTag": "6619efd9-1031-4070-873c-6420e2665670",
             "sourceColumn": "Trimestre",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           },
           {
             "name": "TrimestreAbreviado",
@@ -1101,7 +1091,7 @@
             "formatString": "0",
             "lineageTag": "b7bc83fc-3b6f-48cc-925e-7fec0975eb23",
             "sourceColumn": "Semana",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           },
           {
             "name": "DiaSemana",
@@ -1115,7 +1105,7 @@
             "formatString": "0",
             "lineageTag": "afe770ed-050c-4237-8092-0f56cee7019f",
             "sourceColumn": "DiaSemana",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           },
           {
             "name": "NomeDia",
@@ -1440,7 +1430,7 @@
             "formatString": "0",
             "lineageTag": "1efc9214-f039-4be6-8c59-5c47de0a448d",
             "sourceColumn": "custoUnitario",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           },
           {
             "name": "categoria_descricao",
@@ -1498,12 +1488,12 @@
         "name": "dVendedor",
         "annotations": [
           {
-            "name": "PBI_ResultType",
-            "value": "Table"
-          },
-          {
             "name": "PBI_NavigationStepName",
             "value": "Navegação"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
           }
         ],
         "columns": [
@@ -1546,7 +1536,7 @@
             "formatString": "0",
             "lineageTag": "b3275e3b-938c-432c-be99-512145b98d3f",
             "sourceColumn": "supervisor_id",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           },
           {
             "name": "gerente_id",
@@ -1630,12 +1620,12 @@
         "name": "fVendas",
         "annotations": [
           {
-            "name": "PBI_ResultType",
-            "value": "Table"
-          },
-          {
             "name": "PBI_NavigationStepName",
             "value": "Navegação"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
           }
         ],
         "columns": [
@@ -2053,102 +2043,6 @@
                 "    #\"Tipo Alterado\" = Table.TransformColumnTypes(Fonte,{{\"Coluna 1\", Int64.Type}})",
                 "in",
                 "    #\"Tipo Alterado\""
-              ],
-              "type": "m"
-            }
-          }
-        ]
-      },
-      {
-        "name": "fMetas",
-        "annotations": [
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navegação"
-          },
-          {
-            "name": "PBI_ResultType",
-            "value": "Table"
-          }
-        ],
-        "columns": [
-          {
-            "name": "gerente_id",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "int64",
-            "formatString": "0",
-            "lineageTag": "8f60d3f9-0d41-46cb-84b2-4dc630a28443",
-            "sourceColumn": "gerente_id",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "Data",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              },
-              {
-                "name": "UnderlyingDateTimeDataType",
-                "value": "Date"
-              }
-            ],
-            "dataType": "dateTime",
-            "formatString": "Long Date",
-            "lineageTag": "e99cbd29-2d0b-4140-bb1d-f12156be0457",
-            "sourceColumn": "Data",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "valor",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              },
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"currencyCulture\":\"pt-BR\"}"
-              }
-            ],
-            "dataType": "double",
-            "formatString": "\"R$\"\\ #,0.00;-\"R$\"\\ #,0.00;\"R$\"\\ #,0.00",
-            "lineageTag": "2c1cde69-e89d-4b09-8b3d-9926d3895885",
-            "sourceColumn": "valor",
-            "summarizeBy": "sum"
-          },
-          {
-            "name": "categoria_id",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "int64",
-            "formatString": "0",
-            "lineageTag": "e158267b-2806-419e-83f3-31eb4648c484",
-            "sourceColumn": "categoria_id",
-            "summarizeBy": "none"
-          }
-        ],
-        "lineageTag": "963688d7-835e-4d34-aecf-3b9245be7c78",
-        "partitions": [
-          {
-            "name": "fMetas",
-            "mode": "import",
-            "queryGroup": "Fatos",
-            "source": {
-              "expression": [
-                "let",
-                "    Fonte = Table.Combine({Meta_2023, Meta_2022})",
-                "in",
-                "    Fonte"
               ],
               "type": "m"
             }
