@@ -4,14 +4,14 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 131.25,
-        "y": 0
+        "x": 122.63981196578311,
+        "y": 331.12749230761443
       },
       "nodes": [
         {
           "location": {
-            "x": 423.0211534418645,
-            "y": 0
+            "x": 1052.3797779244776,
+            "y": 282.87060994747259
           },
           "nodeIndex": "dCalendario-pwq",
           "nodeLineageTag": "37fb7096-913e-46ee-9a3a-32b0dbe668d2",
@@ -23,21 +23,21 @@
         },
         {
           "location": {
-            "x": 384.93548292627645,
-            "y": 268.75
+            "x": 401.91715494315821,
+            "y": 297.49064832848109
           },
           "nodeIndex": "dCliente",
           "nodeLineageTag": "08bb9831-8718-4bca-ab76-3025125b4a28",
           "size": {
-            "height": 150.75,
+            "height": 251.21825176063408,
             "width": 234
           },
           "zIndex": 6
         },
         {
           "location": {
-            "x": 199.7711534418645,
-            "y": 622.7703909335828
+            "x": 300.36546045944044,
+            "y": 938.754242525399
           },
           "nodeIndex": "fVendas",
           "nodeLineageTag": "53f6823c-7431-49a9-b339-554463927171",
@@ -49,8 +49,8 @@
         },
         {
           "location": {
-            "x": 750.01560138356274,
-            "y": 192.5
+            "x": 673.2776018380149,
+            "y": 299.63144350510396
           },
           "nodeIndex": "dProduto",
           "nodeLineageTag": "4cc4619f-eab0-439b-857c-351671db0134",
@@ -62,21 +62,21 @@
         },
         {
           "location": {
-            "x": 28.943817941565271,
-            "y": 147.75
+            "x": 121.03854008608661,
+            "y": 299.33851810411392
           },
           "nodeIndex": "dVendedor",
           "nodeLineageTag": "fa9d4317-c3d9-40dd-aaa7-06e6ee7036f8",
           "size": {
-            "height": 234.5,
+            "height": 290.24851530688272,
             "width": 234
           },
           "zIndex": 4
         },
         {
           "location": {
-            "x": 1292.5717834419975,
-            "y": 334.6351954667914
+            "x": 1598.1434038176731,
+            "y": 185.75520802816587
           },
           "nodeIndex": "Medidas",
           "nodeLineageTag": "6a07b12d-36c9-44fa-885e-9ca0b4048c8b",
@@ -88,18 +88,9 @@
         },
         {
           "location": {
-            "x": 1547.6279655004323,
-            "y": 335.3851954667914
+            "x": 1737.8879403776834,
+            "y": 354.10019616464552
           },
-          "nodeIndex": "dgerente",
-          "size": {
-            "height": 200,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {},
           "nodeIndex": "Parâmetro",
           "nodeLineageTag": "37317bf3-d87c-4a77-acf4-6e5f87937bfb",
           "size": {
@@ -109,18 +100,21 @@
           "zIndex": 0
         },
         {
-          "location": {},
-          "nodeIndex": "ItensVendas",
-          "nodeLineageTag": "1dd52ead-22e3-4b8e-ac09-9d9e31a096bd",
+          "location": {
+            "x": 1151.9386201085417,
+            "y": 939.48583642962649
+          },
+          "nodeIndex": "fMetas",
+          "nodeLineageTag": "f4b73e65-8859-42df-8ebe-50fc29d4861c",
           "size": {
-            "height": 224,
+            "height": 218.71878421318297,
             "width": 234
           },
           "zIndex": 0
         }
       ],
       "name": "Todas as tabelas",
-      "zoomValue": 80,
+      "zoomValue": 89.693549131248133,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -130,7 +124,7 @@
       "ordinal": 1,
       "scrollPosition": {
         "x": 0,
-        "y": 26
+        "y": 0
       },
       "nodes": [
         {
@@ -161,19 +155,6 @@
         },
         {
           "location": {
-            "x": 204,
-            "y": 277
-          },
-          "nodeIndex": "dgerente",
-          "nodeLineageTag": "bad14a2f-1818-4f79-b6c8-d11d2a301dd3",
-          "size": {
-            "height": 128,
-            "width": 234
-          },
-          "zIndex": 5
-        },
-        {
-          "location": {
             "x": 833,
             "y": 0
           },
@@ -187,13 +168,13 @@
         }
       ],
       "name": "Layout 1",
-      "zoomValue": 100,
+      "zoomValue": 63.287087723233995,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
       "tablesLocked": false
     }
   ],
-  "selectedDiagram": "Layout 1",
+  "selectedDiagram": "Todas as tabelas",
   "defaultDiagram": "Todas as tabelas"
 }

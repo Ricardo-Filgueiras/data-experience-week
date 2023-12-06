@@ -54,9 +54,10 @@
         "expression": [
           "let",
           "    Fonte = Csv.Document(Web.Contents(\"https://raw.githubusercontent.com/Ricardo-Filgueiras/data-experience-week/main/database/Geografia.csv\"),[Delimiter=\",\", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"cidade\", type text}, {\"uf\", type text}, {\"estado\", type text}})",
           "in",
-          "    #\"Cabeçalhos Promovidos\""
+          "    #\"Tipo Alterado\""
         ],
         "kind": "m",
         "lineageTag": "61b278e5-fad3-47ba-9090-3b549554b628"
@@ -98,9 +99,10 @@
         "expression": [
           "let",
           "    Fonte = Csv.Document(Web.Contents(\"https://raw.githubusercontent.com/Ricardo-Filgueiras/data-experience-week/main/database/CategoriaProduto.csv\"),[Delimiter=\",\", Columns=2, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"descricao\", type text}})",
           "in",
-          "    #\"Cabeçalhos Promovidos\""
+          "    #\"Tipo Alterado\""
         ],
         "kind": "m",
         "lineageTag": "f5aeb8d2-40b2-4619-bf89-7e2b3355334f"
@@ -120,9 +122,10 @@
         "expression": [
           "let",
           "    Fonte = Csv.Document(Web.Contents(\"https://raw.githubusercontent.com/Ricardo-Filgueiras/data-experience-week/main/database/clienteVendedor.csv\"),[Delimiter=\",\", Columns=2, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"cliente_id\", Int64.Type}, {\"vendedor_id\", Int64.Type}})",
           "in",
-          "    #\"Cabeçalhos Promovidos\""
+          "    #\"Tipo Alterado\""
         ],
         "kind": "m",
         "lineageTag": "7644373c-1ff2-40c6-a1f2-aac8c17242c7"
@@ -142,9 +145,10 @@
         "expression": [
           "let",
           "    Fonte = Csv.Document(Web.Contents(\"https://raw.githubusercontent.com/Ricardo-Filgueiras/data-experience-week/main/database/Supervisor.csv\"),[Delimiter=\",\", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"descricao\", type text}, {\"gerente_id\", Int64.Type}, {\"gerente_descricao\", type text}})",
           "in",
-          "    #\"Cabeçalhos Promovidos\""
+          "    #\"Tipo Alterado\""
         ],
         "kind": "m",
         "lineageTag": "a1a35396-51f8-418b-9d29-26f9e721fbcc"
@@ -216,29 +220,31 @@
         ],
         "expression": [
           "let",
-          "    Fonte = Excel.Workbook(File.Contents(\"C:\\Users\\Ricardo\\OneDrive\\Documentos\\Dev\\Xperiun\\semana-data-expert-dados\\Meta_2023.xlsx\"), null, true),",
-          "    #\"Colunas Removidas\" = Table.RemoveColumns(Fonte,{\"Item\", \"Kind\", \"Hidden\"}),",
-          "    #\"Data Expandido\" = Table.ExpandTableColumn(#\"Colunas Removidas\", \"Data\", {\"Column1\", \"Column2\", \"Column3\", \"Column4\", \"Column5\", \"Column6\", \"Column7\"}, {\"Data.Column1\", \"Data.Column2\", \"Data.Column3\", \"Data.Column4\", \"Data.Column5\", \"Data.Column6\", \"Data.Column7\"}),",
-          "    #\"Linhas Filtradas\" = Table.SelectRows(#\"Data Expandido\", each ([Data.Column2] <> null)),",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Linhas Filtradas\", [PromoteAllScalars=true]),",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"1 - Victor Castro\", type text}, {\"Categoria Produto\", type text}, {\"Previsão Vendas\", type any}, {\"1\", type number}, {\"2\", type number}, {\"3\", type number}, {\"4\", type number}, {\"Total\", type any}}),",
-          "    #\"Linhas Filtradas1\" = Table.SelectRows(#\"Tipo Alterado\", each ([Previsão Vendas] <> \"Previsão Vendas\")),",
-          "    #\"Colunas Removidas1\" = Table.RemoveColumns(#\"Linhas Filtradas1\",{\"Total\"}),",
-          "    #\"Colunas Não Dinâmicas\" = Table.UnpivotOtherColumns(#\"Colunas Removidas1\", {\"1 - Victor Castro\", \"Categoria Produto\", \"Previsão Vendas\"}, \"Atributo\", \"Valor\"),",
-          "    #\"Colunas Renomeadas\" = Table.RenameColumns(#\"Colunas Não Dinâmicas\",{{\"Atributo\", \"trimeste\"}, {\"Valor\", \"fator\"}, {\"1 - Victor Castro\", \"gerente_id\"}, {\"Categoria Produto\", \"Categoria_id\"}}),",
-          "    #\"Multiplicação Inserida\" = Table.AddColumn(#\"Colunas Renomeadas\", \"valor_trimestre\", each [Previsão Vendas] * [fator], type number),",
-          "    #\"Colunas Removidas2\" = Table.RemoveColumns(#\"Multiplicação Inserida\",{\"Previsão Vendas\", \"fator\"}),",
-          "    #\"Texto Extraído Antes do Delimitador\" = Table.TransformColumns(#\"Colunas Removidas2\", {{\"gerente_id\", each Text.BeforeDelimiter(_, \" \"), type text}, {\"Categoria_id\", each Text.BeforeDelimiter(_, \" \"), type text}}),",
-          "    #\"Tipo Alterado1\" = Table.TransformColumnTypes(#\"Texto Extraído Antes do Delimitador\",{{\"gerente_id\", Int64.Type}, {\"Categoria_id\", Int64.Type}, {\"trimeste\", Int64.Type}, {\"valor_trimestre\", Int64.Type}}),",
-          "    #\"Função Personalizada Invocada\" = Table.AddColumn(#\"Tipo Alterado1\", \"qtde_dias_uteis\", each fx_dias_uteis_trimestre(2023, [trimeste])),",
+          "    Fonte = Csv.Document(Web.Contents(\"https://raw.githubusercontent.com/Ricardo-Filgueiras/data-experience-week/main/database/Meta_2023_V2.csv\"),[Delimiter=\";\", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),",
+          "    #\"Linhas Filtradas\" = Table.SelectRows(#\"Cabeçalhos Promovidos\", each ([Trimestre] <> \"Trimestre\") and ([_4] = \"1\")),",
+          "    #\"Colunas Renomeadas\" = Table.RenameColumns(#\"Linhas Filtradas\",{{\"Trimestre\", \"1\"}, {\"_1\", \"2\"}, {\"_2\", \"3\"}, {\"_3\", \"4\"}}),",
+          "    #\"Colunas Removidas\" = Table.RemoveColumns(#\"Colunas Renomeadas\",{\"_4\"}),",
+          "    #\"Colunas Não Dinâmicas\" = Table.UnpivotOtherColumns(#\"Colunas Removidas\", {\"1 - Victor Castro\", \"Previsão de Vendas para 2023\", \"\"}, \"Atributo\", \"Valor\"),",
+          "    #\"Colunas Renomeadas1\" = Table.RenameColumns(#\"Colunas Não Dinâmicas\",{{\"1 - Victor Castro\", \"gerente_id\"}, {\"Previsão de Vendas para 2023\", \"categoria_id\"}, {\"\", \"Previsao Vendas\"}, {\"Atributo\", \"Trimestre\"}, {\"Valor\", \"fator\"}}),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Colunas Renomeadas1\",{{\"gerente_id\", type text}, {\"categoria_id\", type text}, {\"Previsao Vendas\", Int64.Type}, {\"Trimestre\", Int64.Type}, {\"fator\", type number}}),",
+          "    #\"Personalização Adicionada\" = Table.AddColumn(#\"Tipo Alterado\", \"valor_trimestre\", each [Previsao Vendas] * [fator]),",
+          "    #\"Colunas Removidas1\" = Table.RemoveColumns(#\"Personalização Adicionada\",{\"Previsao Vendas\"}),",
+          "    #\"Texto Extraído Antes do Delimitador\" = Table.TransformColumns(#\"Colunas Removidas1\", {{\"gerente_id\", each Text.BeforeDelimiter(_, \" \"), type text}, {\"categoria_id\", each Text.BeforeDelimiter(_, \" \"), type text}}),",
+          "    #\"Colunas Removidas2\" = Table.RemoveColumns(#\"Texto Extraído Antes do Delimitador\",{\"fator\"}),",
+          "    #\"Tipo Alterado1\" = Table.TransformColumnTypes(#\"Colunas Removidas2\",{{\"valor_trimestre\", Int64.Type}}),",
+          "    #\"Função Personalizada Invocada\" = Table.AddColumn(#\"Tipo Alterado1\", \"qtde_dias_uteis\", each fx_dias_uteis_trimestre(2023, [Trimestre])),",
           "    #\"qtde_dias_uteis Expandido\" = Table.ExpandTableColumn(#\"Função Personalizada Invocada\", \"qtde_dias_uteis\", {\"Data\", \"qtde_dias_uteis\"}, {\"qtde_dias_uteis.Data\", \"qtde_dias_uteis.qtde_dias_uteis\"}),",
-          "    #\"Personalização Adicionada\" = Table.AddColumn(#\"qtde_dias_uteis Expandido\", \"meta_diaria\", each [valor_trimestre]/[qtde_dias_uteis.qtde_dias_uteis]),",
-          "    #\"Tipo Alterado2\" = Table.TransformColumnTypes(#\"Personalização Adicionada\",{{\"qtde_dias_uteis.Data\", type date}, {\"meta_diaria\", type number}}),",
-          "    #\"Colunas Renomeadas1\" = Table.RenameColumns(#\"Tipo Alterado2\",{{\"qtde_dias_uteis.Data\", \"Data\"}, {\"meta_diaria\", \"valor\"}}),",
-          "    #\"Outras Colunas Removidas\" = Table.SelectColumns(#\"Colunas Renomeadas1\",{\"gerente_id\", \"Categoria_id\", \"Data\", \"valor\"}),",
-          "    #\"Colunas Renomeadas2\" = Table.RenameColumns(#\"Outras Colunas Removidas\",{{\"Categoria_id\", \"categoria_id\"}})",
+          "    #\"Tipo Alterado2\" = Table.TransformColumnTypes(#\"qtde_dias_uteis Expandido\",{{\"qtde_dias_uteis.Data\", type date}, {\"qtde_dias_uteis.qtde_dias_uteis\", Int64.Type}}),",
+          "    #\"Colunas Renomeadas2\" = Table.RenameColumns(#\"Tipo Alterado2\",{{\"qtde_dias_uteis.Data\", \"Data\"}, {\"qtde_dias_uteis.qtde_dias_uteis\", \"qtde_dias_uteis\"}}),",
+          "    #\"Personalização Adicionada1\" = Table.AddColumn(#\"Colunas Renomeadas2\", \"Meta_diaria\", each [valor_trimestre] / [qtde_dias_uteis]),",
+          "    #\"Tipo Alterado3\" = Table.TransformColumnTypes(#\"Personalização Adicionada1\",{{\"Meta_diaria\", type number}}),",
+          "    #\"Colunas Renomeadas3\" = Table.RenameColumns(#\"Tipo Alterado3\",{{\"Meta_diaria\", \"meta_diaria\"}, {\"Trimestre\", \"trimestre\"}}),",
+          "    #\"Colunas Removidas3\" = Table.RemoveColumns(#\"Colunas Renomeadas3\",{\"valor_trimestre\", \"qtde_dias_uteis\"}),",
+          "    #\"Colunas Renomeadas4\" = Table.RenameColumns(#\"Colunas Removidas3\",{{\"meta_diaria\", \"valor\"}}),",
+          "    #\"Colunas Removidas4\" = Table.RemoveColumns(#\"Colunas Renomeadas4\",{\"trimestre\"})",
           "in",
-          "    #\"Colunas Renomeadas2\""
+          "    #\"Colunas Removidas4\""
         ],
         "kind": "m",
         "lineageTag": "10e67b96-0d3f-4b76-9c75-eb3691fbd002"
@@ -320,12 +326,11 @@
         ],
         "expression": [
           "let",
-          "    Fonte = Csv.Document(Web.Contents(\"https://raw.githubusercontent.com/Ricardo-Filgueiras/data-experience-week/main/database/FotoProduto-PinskiDatabase_Fotos.csv\"),[Delimiter=\";\", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    Fonte = Csv.Document(Web.Contents(\"https://raw.githubusercontent.com/Ricardo-Filgueiras/data-experience-week/main/database/FotoProduto-PinskiDatabase_Fotos.csv\"),[Delimiter=\";\", Columns=2, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
           "    #\"Tipo Alterado\" = Table.TransformColumnTypes(Fonte,{{\"Column1\", type text}, {\"Column2\", type text}}),",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Tipo Alterado\", [PromoteAllScalars=true]),",
-          "    #\"Colunas Removidas\" = Table.RemoveColumns(#\"Cabeçalhos Promovidos\",{\"\", \"_1\"})",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Tipo Alterado\", [PromoteAllScalars=true])",
           "in",
-          "    #\"Colunas Removidas\""
+          "    #\"Cabeçalhos Promovidos\""
         ],
         "kind": "m",
         "lineageTag": "b5ae8185-e8ae-4543-80e6-38bb5a909554"
@@ -344,12 +349,11 @@
         ],
         "expression": [
           "let",
-          "    Fonte = Csv.Document(Web.Contents(\"https://raw.githubusercontent.com/Ricardo-Filgueiras/data-experience-week/main/database/FotoVendedor-PinskiDatabase_Fotos.csv\"),[Delimiter=\",\", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    Fonte = Csv.Document(Web.Contents(\"https://raw.githubusercontent.com/Ricardo-Filgueiras/data-experience-week/main/database/FotoVendedor-PinskiDatabase_Fotos.csv\"),[Delimiter=\",\", Columns=2, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
           "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),",
-          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id_vendedor\", Int64.Type}, {\"URL\", type text}}),",
-          "    #\"Colunas Removidas\" = Table.RemoveColumns(#\"Tipo Alterado\",{\"\", \"_1\"})",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id_vendedor\", Int64.Type}, {\"URL\", type text}})",
           "in",
-          "    #\"Colunas Removidas\""
+          "    #\"Tipo Alterado\""
         ],
         "kind": "m",
         "lineageTag": "99c3f269-3a4c-4b92-8344-eacb8c0a6e94"
@@ -369,9 +373,10 @@
         "expression": [
           "let",
           "    Fonte = Csv.Document(Web.Contents(\"https://raw.githubusercontent.com/Ricardo-Filgueiras/data-experience-week/main/database/vendedor.csv\"),[Delimiter=\",\", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
-          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"descricao\", type text}, {\"supervisor_id\", Int64.Type}})",
           "in",
-          "    #\"Cabeçalhos Promovidos\""
+          "    #\"Tipo Alterado\""
         ],
         "kind": "m",
         "lineageTag": "077ff3ba-39b8-46b1-8d32-126b725229ee",
@@ -585,7 +590,7 @@
         "queryGroup": "Origin GitHub"
       },
       {
-        "name": "fMetas",
+        "name": "ItensVendas",
         "annotations": [
           {
             "name": "PBI_NavigationStepName",
@@ -593,18 +598,19 @@
           },
           {
             "name": "PBI_ResultType",
-            "value": "Exception"
+            "value": "Table"
           }
         ],
         "expression": [
           "let",
-          "    Fonte = Table.Combine({Meta_2023, Meta_2022})",
+          "    Fonte = Csv.Document(Web.Contents(\"https://raw.githubusercontent.com/Ricardo-Filgueiras/data-experience-week/main/database/ItensVendas.csv\"),[Delimiter=\",\", Columns=6, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),",
+          "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"vendas_id\", Int64.Type}, {\"produto_id\", Int64.Type}, {\"item_quantidade\", Int64.Type}, {\"valor_unitario\", Int64.Type}, {\"valor_bruto\", Int64.Type}})",
           "in",
-          "    Fonte"
+          "    #\"Tipo Alterado\""
         ],
         "kind": "m",
-        "lineageTag": "83ed3567-d31c-4d34-a98b-0c345c13823b",
-        "queryGroup": "Fatos"
+        "lineageTag": "805400af-98ee-4ba9-96fb-917e43e77df1"
       }
     ],
     "queryGroups": [
@@ -660,20 +666,42 @@
         "toTable": "dCalendario-pwq"
       },
       {
-        "name": "04b273f4-46ec-4700-9a9a-1bc50c372b4d",
-        "crossFilteringBehavior": "bothDirections",
-        "fromColumn": "gerente_id",
-        "fromTable": "dVendedor",
-        "isActive": false,
-        "toColumn": "gerente_id",
-        "toTable": "dgerente"
-      },
-      {
         "name": "53681483-9d1d-4f5c-8994-7a82a28f310f",
         "fromColumn": "produto_id",
         "fromTable": "fVendas",
         "toColumn": "id",
         "toTable": "dProduto"
+      },
+      {
+        "name": "a5976c55-709a-44c7-9934-9694f948e039",
+        "fromColumn": "Data",
+        "fromTable": "fMetas",
+        "toColumn": "Data",
+        "toTable": "dCalendario-pwq"
+      },
+      {
+        "name": "914cfbfb-6277-4078-a810-f03ad3c0e52c",
+        "fromColumn": "gerente_id",
+        "fromTable": "fMetas",
+        "toColumn": "id_vendedor",
+        "toTable": "dVendedor"
+      },
+      {
+        "name": "cee004d1-d858-4f79-b770-7eae658ab997",
+        "fromColumn": "categoria_id",
+        "fromTable": "fMetas",
+        "toCardinality": "many",
+        "toColumn": "categoria_id",
+        "toTable": "dProduto"
+      },
+      {
+        "name": "e2f182de-38e1-4082-b54d-80afdba8ad10",
+        "fromColumn": "gerente_id",
+        "fromTable": "dVendedor",
+        "isActive": false,
+        "toCardinality": "many",
+        "toColumn": "gerente_id",
+        "toTable": "fMetas"
       }
     ],
     "sourceQueryCulture": "pt-BR",
@@ -927,7 +955,7 @@
             "formatString": "0",
             "lineageTag": "e6d74cc1-7925-4140-9a65-1de355cc5ec4",
             "sourceColumn": "Ano",
-            "summarizeBy": "none"
+            "summarizeBy": "sum"
           },
           {
             "name": "NomeMes",
@@ -989,7 +1017,7 @@
             "dataType": "double",
             "lineageTag": "02ce559b-e29e-4ed7-9505-62bf46e07a93",
             "sourceColumn": "MesNum",
-            "summarizeBy": "none"
+            "summarizeBy": "sum"
           },
           {
             "name": "AnoMesINT",
@@ -1006,7 +1034,7 @@
             "dataType": "double",
             "lineageTag": "19217d1c-34f3-436e-8208-ff6c08304965",
             "sourceColumn": "AnoMesINT",
-            "summarizeBy": "none"
+            "summarizeBy": "sum"
           },
           {
             "name": "InicioMes",
@@ -1038,7 +1066,7 @@
             "formatString": "0",
             "lineageTag": "6619efd9-1031-4070-873c-6420e2665670",
             "sourceColumn": "Trimestre",
-            "summarizeBy": "none"
+            "summarizeBy": "sum"
           },
           {
             "name": "TrimestreAbreviado",
@@ -1091,7 +1119,7 @@
             "formatString": "0",
             "lineageTag": "b7bc83fc-3b6f-48cc-925e-7fec0975eb23",
             "sourceColumn": "Semana",
-            "summarizeBy": "none"
+            "summarizeBy": "sum"
           },
           {
             "name": "DiaSemana",
@@ -1105,7 +1133,7 @@
             "formatString": "0",
             "lineageTag": "afe770ed-050c-4237-8092-0f56cee7019f",
             "sourceColumn": "DiaSemana",
-            "summarizeBy": "none"
+            "summarizeBy": "sum"
           },
           {
             "name": "NomeDia",
@@ -1223,12 +1251,12 @@
         "name": "dCliente",
         "annotations": [
           {
-            "name": "PBI_NavigationStepName",
-            "value": "Navegação"
-          },
-          {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navegação"
           }
         ],
         "columns": [
@@ -1337,7 +1365,8 @@
                 "let",
                 "    Fonte = Csv.Document(Web.Contents(\"https://raw.githubusercontent.com/Ricardo-Filgueiras/data-experience-week/main/database/clientes.csv\"),[Delimiter=\",\", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
                 "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),",
-                "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"geografia_id\", Int64.Type}, {\"descricao\", type text}}),",
+                "    #\"Tipo Alterado1\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"geografia_id\", Int64.Type}, {\"descricao\", type text}}),",
+                "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Tipo Alterado1\",{{\"id\", Int64.Type}, {\"geografia_id\", Int64.Type}, {\"descricao\", type text}}),",
                 "    #\"Consultas Mescladas\" = Table.NestedJoin(#\"Tipo Alterado\", {\"geografia_id\"}, Geografia, {\"id\"}, \"Geografia\", JoinKind.LeftOuter),",
                 "    #\"Geografia Expandido\" = Table.ExpandTableColumn(#\"Consultas Mescladas\", \"Geografia\", {\"cidade\", \"uf\", \"estado\"}, {\"cidade\", \"uf\", \"estado\"}),",
                 "    #\"Consultas Mescladas1\" = Table.NestedJoin(#\"Geografia Expandido\", {\"uf\"}, RegioesBrasil, {\"UF\"}, \"RegioesBrasil\", JoinKind.LeftOuter),",
@@ -1430,7 +1459,7 @@
             "formatString": "0",
             "lineageTag": "1efc9214-f039-4be6-8c59-5c47de0a448d",
             "sourceColumn": "custoUnitario",
-            "summarizeBy": "none"
+            "summarizeBy": "sum"
           },
           {
             "name": "categoria_descricao",
@@ -1536,7 +1565,7 @@
             "formatString": "0",
             "lineageTag": "b3275e3b-938c-432c-be99-512145b98d3f",
             "sourceColumn": "supervisor_id",
-            "summarizeBy": "none"
+            "summarizeBy": "sum"
           },
           {
             "name": "gerente_id",
@@ -1546,10 +1575,11 @@
                 "value": "Automatic"
               }
             ],
-            "dataType": "string",
+            "dataType": "int64",
+            "formatString": "0",
             "lineageTag": "9bb164cc-0701-4834-a2f1-b51184863ee1",
             "sourceColumn": "gerente_id",
-            "summarizeBy": "none"
+            "summarizeBy": "sum"
           },
           {
             "name": "sup_descricao",
@@ -1620,12 +1650,12 @@
         "name": "fVendas",
         "annotations": [
           {
-            "name": "PBI_NavigationStepName",
-            "value": "Navegação"
-          },
-          {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navegação"
           }
         ],
         "columns": [
@@ -1736,12 +1766,16 @@
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
               }
             ],
-            "dataType": "string",
+            "dataType": "double",
             "lineageTag": "f1019d86-6781-4ca4-bb60-225f98687dfb",
             "sourceColumn": "valor_desconto",
-            "summarizeBy": "none"
+            "summarizeBy": "sum"
           },
           {
             "name": "vendedor_id",
@@ -1751,7 +1785,8 @@
                 "value": "Automatic"
               }
             ],
-            "dataType": "string",
+            "dataType": "int64",
+            "formatString": "0",
             "lineageTag": "060c2db0-e574-4c1e-8712-127f0bc9166d",
             "sourceColumn": "vendedor_id",
             "summarizeBy": "none"
@@ -1774,9 +1809,10 @@
                 "    #\"Colunas Renomeadas\" = Table.RenameColumns(#\"Outras Colunas Removidas\",{{\"ItensVendas.produto_id\", \"produto_id\"}, {\"ItensVendas.item_quantidade\", \"item_quantidade\"}, {\"ItensVendas.valor_unitario\", \"valor_unitario\"}}),",
                 "    #\"Consultas Mescladas1\" = Table.NestedJoin(#\"Colunas Renomeadas\", {\"cliente_id\"}, ClientesVendedores, {\"cliente_id\"}, \"ClientesVendedores\", JoinKind.LeftOuter),",
                 "    #\"ClientesVendedores Expandido\" = Table.ExpandTableColumn(#\"Consultas Mescladas1\", \"ClientesVendedores\", {\"vendedor_id\"}, {\"ClientesVendedores.vendedor_id\"}),",
-                "    #\"Colunas Renomeadas1\" = Table.RenameColumns(#\"ClientesVendedores Expandido\",{{\"ClientesVendedores.vendedor_id\", \"vendedor_id\"}})",
+                "    #\"Colunas Renomeadas1\" = Table.RenameColumns(#\"ClientesVendedores Expandido\",{{\"ClientesVendedores.vendedor_id\", \"vendedor_id\"}}),",
+                "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Colunas Renomeadas1\",{{\"id\", Int64.Type}, {\"data\", type date}, {\"nfe\", type text}, {\"cliente_id\", Int64.Type}, {\"produto_id\", Int64.Type}, {\"item_quantidade\", Int64.Type}, {\"valor_unitario\", Int64.Type}, {\"valor_desconto\", type number}, {\"vendedor_id\", Int64.Type}})",
                 "in",
-                "    #\"Colunas Renomeadas1\""
+                "    #\"Tipo Alterado\""
               ],
               "type": "m"
             }
@@ -2025,7 +2061,7 @@
             "expression": [
               "",
               "    CALCULATE(",
-              "    MAXX(fVendas, RELATED(dProduto[descricao]),TRUE),",
+              "    MAXX(fVendas, RELATED(dProduto[descricao])),",
               "    fVendas[vendedor_id]",
               "    )"
             ],
@@ -2045,66 +2081,6 @@
                 "    #\"Tipo Alterado\""
               ],
               "type": "m"
-            }
-          }
-        ]
-      },
-      {
-        "name": "dgerente",
-        "annotations": [
-          {
-            "name": "PBI_Id",
-            "value": "4184c6c94cc64522a195d9a87074ee3f"
-          }
-        ],
-        "columns": [
-          {
-            "name": "gerente_descricao",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "isDataTypeInferred": true,
-            "isHidden": true,
-            "isNameInferred": true,
-            "lineageTag": "fbb67fe3-d36a-4b73-812f-d91f32ab836a",
-            "sourceColumn": "dVendedor[gerente_descricao]",
-            "summarizeBy": "none",
-            "type": "calculatedTableColumn"
-          },
-          {
-            "name": "gerente_id",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "isDataTypeInferred": true,
-            "isHidden": true,
-            "isNameInferred": true,
-            "lineageTag": "b5a2aeaf-84a6-44fd-8d4d-305dc8108e3d",
-            "sourceColumn": "dVendedor[gerente_id]",
-            "summarizeBy": "none",
-            "type": "calculatedTableColumn"
-          }
-        ],
-        "isHidden": true,
-        "lineageTag": "bad14a2f-1818-4f79-b6c8-d11d2a301dd3",
-        "partitions": [
-          {
-            "name": "dgerente",
-            "mode": "import",
-            "source": {
-              "expression": [
-                "SUMMARIZE(",
-                "    dVendedor,dVendedor[gerente_descricao],dVendedor[gerente_id])"
-              ],
-              "type": "calculated"
             }
           }
         ]
@@ -2207,7 +2183,7 @@
         ]
       },
       {
-        "name": "ItensVendas",
+        "name": "fMetas",
         "annotations": [
           {
             "name": "PBI_NavigationStepName",
@@ -2220,21 +2196,42 @@
         ],
         "columns": [
           {
-            "name": "id",
+            "name": "Data",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
               }
             ],
-            "dataType": "int64",
-            "formatString": "0",
-            "lineageTag": "2fccfd05-d35b-41d6-9c69-315b421f362c",
-            "sourceColumn": "id",
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "54efe662-501d-48c3-baa1-bfe5080ccdf1",
+            "sourceColumn": "Data",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "valor",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "bc82dc70-37f6-49a7-a9ac-067ae04624c7",
+            "sourceColumn": "valor",
             "summarizeBy": "sum"
           },
           {
-            "name": "vendas_id",
+            "name": "gerente_id",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -2243,12 +2240,12 @@
             ],
             "dataType": "int64",
             "formatString": "0",
-            "lineageTag": "d8dd00a0-e191-4c1f-b323-01e0f103b77d",
-            "sourceColumn": "vendas_id",
-            "summarizeBy": "sum"
+            "lineageTag": "cb5ef69b-69dd-434c-8441-18fda8c161c3",
+            "sourceColumn": "gerente_id",
+            "summarizeBy": "none"
           },
           {
-            "name": "produto_id",
+            "name": "categoria_id",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -2257,64 +2254,22 @@
             ],
             "dataType": "int64",
             "formatString": "0",
-            "lineageTag": "df4b27f0-3d3e-45e0-9c70-a57d901b3aad",
-            "sourceColumn": "produto_id",
-            "summarizeBy": "sum"
-          },
-          {
-            "name": "item_quantidade",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "int64",
-            "formatString": "0",
-            "lineageTag": "c73158c1-e4b6-40fb-9f47-71a6ce70b143",
-            "sourceColumn": "item_quantidade",
-            "summarizeBy": "sum"
-          },
-          {
-            "name": "valor_unitario",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "int64",
-            "formatString": "0",
-            "lineageTag": "b0442031-e843-492f-b6b2-194fc50c9350",
-            "sourceColumn": "valor_unitario",
-            "summarizeBy": "sum"
-          },
-          {
-            "name": "valor_bruto",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "int64",
-            "formatString": "0",
-            "lineageTag": "bcec4e70-f5bd-4e4e-bc9e-b8a348885598",
-            "sourceColumn": "valor_bruto",
-            "summarizeBy": "sum"
+            "lineageTag": "8f4ee5e1-879c-44eb-a51b-f69633e02eee",
+            "sourceColumn": "categoria_id",
+            "summarizeBy": "none"
           }
         ],
-        "lineageTag": "1dd52ead-22e3-4b8e-ac09-9d9e31a096bd",
+        "lineageTag": "f4b73e65-8859-42df-8ebe-50fc29d4861c",
         "partitions": [
           {
-            "name": "ItensVendas",
+            "name": "fMetas",
             "mode": "import",
+            "queryGroup": "Fatos",
             "source": {
               "expression": [
                 "let",
-                "    Fonte = Csv.Document(Web.Contents(\"https://raw.githubusercontent.com/Ricardo-Filgueiras/data-experience-week/main/database/ItensVendas.csv\"),[Delimiter=\",\", Columns=6, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
-                "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),",
-                "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"id\", Int64.Type}, {\"vendas_id\", Int64.Type}, {\"produto_id\", Int64.Type}, {\"item_quantidade\", Int64.Type}, {\"valor_unitario\", Int64.Type}, {\"valor_bruto\", Int64.Type}})",
+                "    Fonte = Table.Combine({Meta_2023, Meta_2022}),",
+                "    #\"Tipo Alterado\" = Table.TransformColumnTypes(Fonte,{{\"gerente_id\", Int64.Type}, {\"categoria_id\", Int64.Type}, {\"Data\", type date}, {\"valor\", type number}})",
                 "in",
                 "    #\"Tipo Alterado\""
               ],
