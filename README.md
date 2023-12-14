@@ -5,6 +5,8 @@
 
 Este repositório contém um projeto desenvolvido durante o curso de Power BI oferecido pela Xperiun "Data Expert". Meu principal objetivo é explorar o versionamento de relatórios do Power BI usando práticas do Git e GitHub, trabalhando isso durante os dias do curso.
 
+Importante : versão power BI agosto 2023 ou superior (habilite a opcão tipo de Arquivo "Pbip").
+
 ## Sobre o Curso
 
 O curso oferecido pela Xperiun proporcionou uma base sólida no Power BI, permitindo explorar suas funcionalidades e capacidades avançadas para análise de dados e geração de relatórios dinâmicos.
